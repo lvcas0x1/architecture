@@ -1,0 +1,129 @@
+{
+  "patterns": {
+    "arn": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
+    "iconKey": "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$",
+    "relationType": "^[a-z][a-z0-9\\-]*$",
+    "accountId": "^[0-9]{12}$"
+  },
+  "connectableNodeTypes": [
+    "group",
+    "resource",
+    "shape"
+  ],
+  "containerNodeTypes": [
+    "group",
+    "shape"
+  ],
+  "topLevelGroupStyles": [
+    "generic",
+    "global",
+    "on-premises"
+  ],
+  "groupStyleLabels": {
+    "global": "AWS Cloud",
+    "on-premises": "On-premises",
+    "account": "AWS Account",
+    "region": "Region",
+    "vpc": "VPC",
+    "az": "Availability Zone",
+    "subnet-public": "Public subnet",
+    "subnet-private": "Private subnet",
+    "security-group": "Security group",
+    "auto-scaling-group": "Auto Scaling group",
+    "generic": "Generic group"
+  },
+  "overlappableGroupStyles": [
+    [
+      "az",
+      "vpc"
+    ]
+  ],
+  "groupNesting": {
+    "global": [],
+    "on-premises": [],
+    "account": [
+      "global"
+    ],
+    "region": [
+      "account",
+      "global"
+    ],
+    "vpc": [
+      "region"
+    ],
+    "az": [
+      "region",
+      "vpc"
+    ],
+    "subnet-public": [
+      "az",
+      "vpc"
+    ],
+    "subnet-private": [
+      "az",
+      "vpc"
+    ],
+    "security-group": [
+      "az",
+      "subnet-private",
+      "subnet-public",
+      "vpc"
+    ],
+    "auto-scaling-group": [
+      "az",
+      "subnet-private",
+      "subnet-public",
+      "vpc"
+    ],
+    "generic": []
+  },
+  "resourceScopeContainers": {
+    "global": [
+      "account",
+      "global"
+    ],
+    "region": [
+      "auto-scaling-group",
+      "az",
+      "region",
+      "security-group",
+      "subnet-private",
+      "subnet-public",
+      "vpc"
+    ],
+    "vpc": [
+      "auto-scaling-group",
+      "az",
+      "security-group",
+      "subnet-private",
+      "subnet-public",
+      "vpc"
+    ],
+    "zone": [
+      "auto-scaling-group",
+      "az",
+      "security-group",
+      "subnet-private",
+      "subnet-public"
+    ],
+    "subnet": [
+      "auto-scaling-group",
+      "security-group",
+      "subnet-private",
+      "subnet-public"
+    ],
+    "any": [
+      "account",
+      "auto-scaling-group",
+      "az",
+      "generic",
+      "global",
+      "on-premises",
+      "region",
+      "security-group",
+      "subnet-private",
+      "subnet-public",
+      "vpc"
+    ]
+  }
+}

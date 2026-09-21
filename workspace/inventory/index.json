@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-19T18:52:39.001705Z",
+  "source": "describe",
+  "entries": [
+    {
+      "arn": "arn:aws:ec2:ap-northeast-1:123456789012:instance/i-0abc123def4567890",
+      "accountId": "123456789012",
+      "accountAlias": "prod",
+      "region": "ap-northeast-1",
+      "resourceType": "AWS::EC2::Instance",
+      "resourceId": "i-0abc123def4567890",
+      "service": "EC2",
+      "name": "ec2-ap1",
+      "tags": [
+        {
+          "key": "Name",
+          "value": "ec2-ap1"
+        },
+        {
+          "key": "Env",
+          "value": "prod"
+        },
+        {
+          "key": "Owner",
+          "value": "platform"
+        },
+        {
+          "key": "CostCenter",
+          "value": "cc-1001"
+        }
+      ],
+      "iconKey": "Architecture/Compute/Amazon-EC2",
+      "lifecycle": "active",
+      "fetchedAt": "2026-09-19T18:52:38.996234Z",
+      "hasDetail": true
+    },
+    {
+      "arn": "arn:aws:elasticloadbalancing:ap-northeast-1:123456789012:loadbalancer/app/alb-prod/0a1b2c3d4e5f6789",
+      "accountId": "123456789012",
+      "accountAlias": "prod",
+      "region": "ap-northeast-1",
+      "resourceType": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+      "resourceId": "app/alb-prod/0a1b2c3d4e5f6789",
+      "service": "ELB",
+      "name": "alb-prod",
+      "tags": [],
+      "iconKey": "Architecture/Networking-Content-Delivery/Elastic-Load-Balancing",
+      "lifecycle": "active",
+      "fetchedAt": "2026-09-19T18:52:38.996234Z",
+      "hasDetail": true
+    },
+    {
+      "arn": "arn:aws:lambda:ap-northeast-1:123456789012:function:prod-image-resizer",
+      "accountId": "123456789012",
+      "accountAlias": "prod",
+      "region": "ap-northeast-1",
+      "resourceType": "AWS::Lambda::Function",
+      "resourceId": "prod-image-resizer",
+      "service": "Lambda",
+      "name": "prod-image-resizer",
+      "tags": [
+        {
+          "key": "Env",
+          "value": "prod"
+        },
+        {
+          "key": "Owner",
+          "value": "platform"
+        }
+      ],
+      "iconKey": "Architecture/Compute/AWS-Lambda",
+      "lifecycle": "active",
+      "fetchedAt": "2026-09-19T18:52:38.996234Z",
+      "hasDetail": true
+    },
+    {
+      "arn": "arn:aws:rds:ap-northeast-1:123456789012:db:rds-prod-ap1",
+      "accountId": "123456789012",
+      "accountAlias": "prod",
+      "region": "ap-northeast-1",
+      "resourceType": "AWS::RDS::DBInstance",
+      "resourceId": "rds-prod-ap1",
+      "service": "RDS",
+      "name": "rds-prod-ap1",
+      "tags": [
+        {
+          "key": "Env",
+          "value": "prod"
+        },
+        {
+          "key": "Owner",
+          "value": "platform"
+        }
+      ],
+      "iconKey": "Architecture/Databases/Amazon-RDS",
+      "lifecycle": "active",
+      "fetchedAt": "2026-09-19T18:52:38.996234Z",
+      "hasDetail": true
+    },
+    {
+      "arn": "arn:aws:s3:::prod-app-assets-ap1",
+      "accountId": "123456789012",
+      "accountAlias": "prod",
+      "region": "ap-northeast-1",
+      "resourceType": "AWS::S3::Bucket",
+      "resourceId": "prod-app-assets-ap1",
+      "service": "S3",
+      "name": "prod-app-assets-ap1",
+      "tags": [
+        {
+          "key": "Env",
+          "value": "prod"
+        }
+      ],
+      "iconKey": "Architecture/Storage/Amazon-Simple-Storage-Service",
+      "lifecycle": "active",
+      "fetchedAt": "2026-09-19T18:52:38.996234Z",
+      "hasDetail": true
+    },
+    {
+      "arn": "arn:aws:ec2:ap-northeast-1:123456789012:security-group/sg-0web0000000000000",
+      "accountId": "123456789012",
+      "accountAlias": "prod",
+      "region": "ap-northeast-1",
+      "resourceType": "AWS::EC2::SecurityGroup",
+      "resourceId": "sg-0web0000000000000",
+      "service": "VPC",
+      "name": "sg-web",
+      "tags": [
+        {
+          "key": "Name",
+          "value": "sg-web"
+        }
+      ],
+      "iconKey": "Architecture/Security-Identity/AWS-Network-Firewall",
+      "lifecycle": "active",
+      "fetchedAt": "2026-09-19T18:52:38.996234Z",
+      "hasDetail": true
+    },
+    {
+      "arn": "arn:aws:ec2:ap-northeast-1:123456789012:subnet/subnet-0private0000000",
+      "accountId": "123456789012",
+      "accountAlias": "prod",
+      "region": "ap-northeast-1",
+      "resourceType": "AWS::EC2::Subnet",
+      "resourceId": "subnet-0private0000000",
+      "service": "VPC",
+      "name": "subnet-private-1a",
+      "tags": [
+        {
+          "key": "Name",
+          "value": "subnet-private-1a"
+        }
+      ],
+      "iconKey": "Architecture/Networking-Content-Delivery/Amazon-Virtual-Private-Cloud",
+      "lifecycle": "active",
+      "fetchedAt": "2026-09-19T18:52:38.996234Z",
+      "hasDetail": true
+    },
+    {
+      "arn": "arn:aws:ec2:ap-northeast-1:123456789012:subnet/subnet-0public00000000",
+      "accountId": "123456789012",
+      "accountAlias": "prod",
+      "region": "ap-northeast-1",
+      "resourceType": "AWS::EC2::Subnet",
+      "resourceId": "subnet-0public00000000",
+      "service": "VPC",
+      "name": "subnet-public-1a",
+      "tags": [
+        {
+          "key": "Name",
+          "value": "subnet-public-1a"
+        }
+      ],
+      "iconKey": "Architecture/Networking-Content-Delivery/Amazon-Virtual-Private-Cloud",
+      "lifecycle": "active",
+      "fetchedAt": "2026-09-19T18:52:38.996234Z",
+      "hasDetail": true
+    },
+    {
+      "arn": "arn:aws:ec2:ap-northeast-1:123456789012:vpc/vpc-0prod0000000000",
+      "accountId": "123456789012",
+      "accountAlias": "prod",
+      "region": "ap-northeast-1",
+      "resourceType": "AWS::EC2::VPC",
+      "resourceId": "vpc-0prod0000000000",
+      "service": "VPC",
+      "name": "vpc-prod",
+      "tags": [
+        {
+          "key": "Name",
+          "value": "vpc-prod"
+        },
+        {
+          "key": "Env",
+          "value": "prod"
+        }
+      ],
+      "iconKey": "Architecture/Networking-Content-Delivery/Amazon-Virtual-Private-Cloud",
+      "lifecycle": "active",
+      "fetchedAt": "2026-09-19T18:52:38.996234Z",
+      "hasDetail": true
+    }
+  ]
+}

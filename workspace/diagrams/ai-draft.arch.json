@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "title": "AI draft: three-tier production",
+    "description": "Example of AI output without coordinates — ELK places it on load.",
+    "generator": "ai",
+    "accountIds": [
+      "123456789012"
+    ],
+    "regions": [
+      "ap-northeast-1"
+    ]
+  },
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  },
+  "layout": {
+    "mode": "auto",
+    "algorithm": "layered",
+    "direction": "RIGHT",
+    "nodeSpacing": 48,
+    "layerSpacing": 96,
+    "padding": 32
+  },
+  "nodes": [
+    {
+      "id": "g-global",
+      "type": "group",
+      "data": {
+        "label": "AWS Cloud",
+        "labelColor": null,
+        "fillColor": null,
+        "fillOpacity": null,
+        "style": "global",
+        "resourceRef": null,
+        "iconKey": null,
+        "collapsed": false,
+        "origin": "ai"
+      }
+    },
+    {
+      "id": "g-region",
+      "type": "group",
+      "data": {
+        "label": "ap-northeast-1",
+        "labelColor": null,
+        "fillColor": null,
+        "fillOpacity": null,
+        "style": "region",
+        "resourceRef": null,
+        "iconKey": null,
+        "collapsed": false,
+        "origin": "ai"
+      },
+      "parentId": "g-global"
+    },
+    {
+      "id": "g-vpc",
+      "type": "group",
+      "data": {
+        "label": "vpc-prod (10.0.0.0/16)",
+        "style": "vpc",
+        "resourceRef": "arn:aws:ec2:ap-northeast-1:123456789012:vpc/vpc-0prod0000000000",
+        "origin": "ai"
+      },
+      "parentId": "g-region"
+    },
+    {
+      "id": "g-subnet-pub",
+      "type": "group",
+      "parentId": "g-vpc",
+      "data": {
+        "label": "subnet-public-1a",
+        "style": "subnet-public",
+        "resourceRef": "arn:aws:ec2:ap-northeast-1:123456789012:subnet/subnet-0public00000000",
+        "origin": "ai"
+      }
+    },
+    {
+      "id": "g-subnet-pri",
+      "type": "group",
+      "parentId": "g-vpc",
+      "data": {
+        "label": "subnet-private-1a",
+        "style": "subnet-private",
+        "resourceRef": "arn:aws:ec2:ap-northeast-1:123456789012:subnet/subnet-0private0000000",
+        "origin": "ai"
+      }
+    },
+    {
+      "id": "n-alb",
+      "type": "resource",
+      "parentId": "g-subnet-pub",
+      "data": {
+        "iconKey": "Architecture/Networking-Content-Delivery/Elastic-Load-Balancing",
+        "resourceRef": "arn:aws:elasticloadbalancing:ap-northeast-1:123456789012:loadbalancer/app/alb-prod/0a1b2c3d4e5f6789",
+        "origin": "ai"
+      }
+    },
+    {
+      "id": "n-ec2",
+      "type": "resource",
+      "parentId": "g-subnet-pri",
+      "data": {
+        "iconKey": "Architecture/Compute/Amazon-EC2",
+        "resourceRef": "arn:aws:ec2:ap-northeast-1:123456789012:instance/i-0abc123def4567890",
+        "origin": "ai"
+      }
+    },
+    {
+      "id": "n-rds",
+      "type": "resource",
+      "parentId": "g-subnet-pri",
+      "data": {
+        "iconKey": "Architecture/Databases/Amazon-RDS",
+        "resourceRef": "arn:aws:rds:ap-northeast-1:123456789012:db:rds-prod-ap1",
+        "origin": "ai"
+      }
+    },
+    {
+      "id": "n-s3",
+      "type": "resource",
+      "data": {
+        "iconKey": "Architecture/Storage/Amazon-Simple-Storage-Service",
+        "resourceRef": "arn:aws:s3:::prod-app-assets-ap1",
+        "origin": "ai"
+      },
+      "parentId": "g-region"
+    },
+    {
+      "id": "n-lambda",
+      "type": "resource",
+      "data": {
+        "iconKey": "Architecture/Compute/AWS-Lambda",
+        "resourceRef": "arn:aws:lambda:ap-northeast-1:123456789012:function:prod-image-resizer",
+        "origin": "ai"
+      },
+      "parentId": "g-region"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-alb-ec2",
+      "source": "n-alb",
+      "target": "n-ec2",
+      "data": {
+        "line": "solid",
+        "arrow": "end",
+        "router": "smoothstep",
+        "label": "HTTP/80",
+        "relationType": "targets",
+        "origin": "ai"
+      }
+    },
+    {
+      "id": "e-ec2-rds",
+      "source": "n-ec2",
+      "target": "n-rds",
+      "data": {
+        "line": "solid",
+        "arrow": "both",
+        "router": "smoothstep",
+        "label": "TCP/3306",
+        "relationType": "connects-to",
+        "origin": "ai"
+      }
+    },
+    {
+      "id": "e-s3-lambda",
+      "source": "n-s3",
+      "target": "n-lambda",
+      "data": {
+        "line": "dashed",
+        "arrow": "end",
+        "router": "smoothstep",
+        "label": "ObjectCreated",
+        "relationType": "triggers",
+        "origin": "ai"
+      }
+    },
+    {
+      "id": "e-ec2-s3",
+      "source": "n-ec2",
+      "target": "n-s3",
+      "data": {
+        "line": "solid",
+        "arrow": "end",
+        "router": "smoothstep",
+        "label": "HTTPS",
+        "relationType": "writes-to",
+        "origin": "ai"
+      }
+    }
+  ]
+}

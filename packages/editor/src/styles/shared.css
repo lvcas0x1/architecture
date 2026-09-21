@@ -1,0 +1,108 @@
+/** Shared editor and viewer theme. */
+
+@theme {
+  --color-canvas: #f6f7f9;
+  --color-panel: #ffffff;
+  --color-border-subtle: #dfe3ea;
+  --color-ink: #1d2330;
+  --color-ink-muted: #5b6478;
+  --color-accent: #3f5bd9;
+  --color-danger: #c0504d;
+  --color-warn: #b8860b;
+  --font-ui:
+    system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+}
+
+/* Tone React Flow's defaults down to suit an AWS diagram */
+.react-flow__node {
+  font-family: var(--font-ui);
+  font-size: 12px;
+}
+
+.react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background: var(--color-accent);
+  border: 1.5px solid #fff;
+  opacity: 0;
+  transition: opacity 0.12s;
+  /* Keep them from slipping behind the icon or the labels */
+  z-index: 1;
+}
+
+.react-flow__node:hover .react-flow__handle,
+.react-flow__node.selected .react-flow__handle {
+  opacity: 1;
+}
+
+.react-flow__edge-path {
+  transition: stroke-width 0.1s;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke-width: 3 !important;
+}
+
+.react-flow__edge-text {
+  font-size: 11px;
+  fill: var(--color-ink-muted);
+}
+
+.react-flow__edge-textbg {
+  fill: var(--color-canvas);
+}
+
+/* A crosshair cursor on the canvas while a drawing tool is active */
+.canvas-drawing .react-flow__pane {
+  cursor: crosshair;
+}
+
+/* In line mode, keep the connection points visible so it is clear where lines start */
+.canvas-connecting .react-flow__handle {
+  opacity: 1;
+}
+
+/* The vertical zoom slider on the right.
+   appearance: none removes the browser's own track as well, leaving the bar
+   invisible against the background, so the track and thumb are drawn here. */
+.zoom-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  writing-mode: vertical-lr;
+  direction: rtl;
+  background: transparent;
+  cursor: pointer;
+}
+
+.zoom-slider::-webkit-slider-runnable-track {
+  width: 4px;
+  border-radius: 999px;
+  background: var(--color-border-subtle);
+}
+
+.zoom-slider::-moz-range-track {
+  width: 4px;
+  border-radius: 999px;
+  background: var(--color-border-subtle);
+}
+
+.zoom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  margin-left: -4.5px; /* centre it on the 4px track */
+  border-radius: 999px;
+  background: var(--color-accent);
+  border: 2px solid var(--color-panel);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+}
+
+.zoom-slider::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  border: 2px solid var(--color-panel);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+}

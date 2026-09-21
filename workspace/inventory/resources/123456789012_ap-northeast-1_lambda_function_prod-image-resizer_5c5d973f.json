@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "1.0",
+  "arn": "arn:aws:lambda:ap-northeast-1:123456789012:function:prod-image-resizer",
+  "accountId": "123456789012",
+  "accountAlias": "prod",
+  "region": "ap-northeast-1",
+  "resourceType": "AWS::Lambda::Function",
+  "resourceId": "prod-image-resizer",
+  "service": "Lambda",
+  "name": "prod-image-resizer",
+  "tags": [
+    {
+      "key": "Env",
+      "value": "prod"
+    },
+    {
+      "key": "Owner",
+      "value": "platform"
+    }
+  ],
+  "iconKey": "Architecture/Compute/AWS-Lambda",
+  "lifecycle": "active",
+  "fetchedAt": "2026-09-19T18:52:38.996234Z",
+  "deletedAt": null,
+  "lastError": null,
+  "sections": [
+    {
+      "title": "Overview",
+      "rows": [
+        {
+          "label": "Runtime",
+          "value": "python3.13",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Handler",
+          "value": "app.handler",
+          "kind": "code",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Architecture",
+          "value": [
+            "arm64"
+          ],
+          "kind": "list",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "State",
+          "value": "Active",
+          "kind": "badge",
+          "tone": "ok",
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Last modified",
+          "value": "2026-08-20T04:11:00.000+0000",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        }
+      ],
+      "collapsed": false
+    },
+    {
+      "title": "Runtime settings",
+      "rows": [
+        {
+          "label": "Memory",
+          "value": "1024 MB",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Timeout",
+          "value": "30 s",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Execution role",
+          "value": "arn:aws:iam::123456789012:role/prod-image-resizer",
+          "kind": "link",
+          "tone": null,
+          "href": null,
+          "ref": "arn:aws:iam::123456789012:role/prod-image-resizer"
+        }
+      ],
+      "collapsed": false
+    },
+    {
+      "title": "Network",
+      "rows": [
+        {
+          "label": "VPC",
+          "value": "None (outside a VPC)",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Subnet",
+          "value": [],
+          "kind": "list",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Security groups",
+          "value": [],
+          "kind": "list",
+          "tone": null,
+          "href": null,
+          "ref": null
+        }
+      ],
+      "collapsed": false
+    }
+  ],
+  "relations": [
+    {
+      "type": "assumes-role",
+      "targetArn": "arn:aws:iam::123456789012:role/prod-image-resizer",
+      "label": null
+    }
+  ],
+  "raw": null
+}

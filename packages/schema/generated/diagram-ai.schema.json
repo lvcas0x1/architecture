@@ -1,0 +1,984 @@
+{
+  "$defs": {
+    "ArrowStyle": {
+      "enum": [
+        "none",
+        "start",
+        "end",
+        "both"
+      ],
+      "title": "ArrowStyle",
+      "type": "string"
+    },
+    "BorderSide": {
+      "enum": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "title": "BorderSide",
+      "type": "string"
+    },
+    "DiagramMeta": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "default": "Untitled architecture",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "generator": {
+          "default": "user",
+          "enum": [
+            "user",
+            "ai",
+            "mixed"
+          ],
+          "type": "string"
+        },
+        "createdAt": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "updatedAt": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "accountIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "regions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "title": "DiagramMeta",
+      "type": "object"
+    },
+    "Edge": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "source": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "target": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "sourceHandle": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "targetHandle": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "data": {
+          "$ref": "#/$defs/EdgeData"
+        }
+      },
+      "required": [
+        "id",
+        "source",
+        "target"
+      ],
+      "title": "Edge",
+      "type": "object"
+    },
+    "EdgeData": {
+      "additionalProperties": false,
+      "properties": {
+        "line": {
+          "$ref": "#/$defs/LineStyle",
+          "default": "solid"
+        },
+        "arrow": {
+          "$ref": "#/$defs/ArrowStyle",
+          "default": "end"
+        },
+        "router": {
+          "$ref": "#/$defs/EdgeRouter",
+          "default": "smoothstep"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "color": {
+          "anyOf": [
+            {
+              "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "width": {
+          "default": 1.5,
+          "exclusiveMinimum": 0,
+          "maximum": 12,
+          "type": "number"
+        },
+        "relationType": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin",
+          "default": "user"
+        }
+      },
+      "title": "EdgeData",
+      "type": "object"
+    },
+    "EdgeRouter": {
+      "enum": [
+        "straight",
+        "smoothstep",
+        "step",
+        "bezier"
+      ],
+      "title": "EdgeRouter",
+      "type": "string"
+    },
+    "GroupNode": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Position"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Size"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "parentId": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "zIndex": {
+          "default": 0,
+          "type": "integer"
+        },
+        "locked": {
+          "default": false,
+          "type": "boolean"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "type": {
+          "const": "group",
+          "default": "group",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/GroupNodeData"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "GroupNode",
+      "type": "object"
+    },
+    "GroupNodeData": {
+      "additionalProperties": false,
+      "description": "A box (VPC / AZ / subnet / any frame).",
+      "properties": {
+        "label": {
+          "default": "",
+          "type": "string"
+        },
+        "labelColor": {
+          "anyOf": [
+            {
+              "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fillColor": {
+          "anyOf": [
+            {
+              "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fillOpacity": {
+          "anyOf": [
+            {
+              "maximum": 0.9,
+              "minimum": 0.1,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "style": {
+          "$ref": "#/$defs/GroupStyle",
+          "default": "generic"
+        },
+        "resourceRef": {
+          "anyOf": [
+            {
+              "description": "Resource ARN (the key a diagram references)",
+              "pattern": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "iconKey": {
+          "anyOf": [
+            {
+              "examples": [
+                "Architecture/Compute/Amazon-EC2"
+              ],
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "collapsed": {
+          "default": false,
+          "type": "boolean"
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin",
+          "default": "user"
+        }
+      },
+      "title": "GroupNodeData",
+      "type": "object"
+    },
+    "GroupStyle": {
+      "description": "Box presets. Border colour, corner label and pale fill follow the AWS diagram conventions.",
+      "enum": [
+        "global",
+        "on-premises",
+        "account",
+        "region",
+        "vpc",
+        "az",
+        "subnet-public",
+        "subnet-private",
+        "security-group",
+        "auto-scaling-group",
+        "generic"
+      ],
+      "title": "GroupStyle",
+      "type": "string"
+    },
+    "LayoutMode": {
+      "enum": [
+        "manual",
+        "auto"
+      ],
+      "title": "LayoutMode",
+      "type": "string"
+    },
+    "LayoutOptions": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "$ref": "#/$defs/LayoutMode",
+          "default": "manual"
+        },
+        "algorithm": {
+          "default": "layered",
+          "enum": [
+            "layered",
+            "mrtree",
+            "force",
+            "rectpacking"
+          ],
+          "type": "string"
+        },
+        "direction": {
+          "default": "RIGHT",
+          "enum": [
+            "RIGHT",
+            "DOWN",
+            "LEFT",
+            "UP"
+          ],
+          "type": "string"
+        },
+        "nodeSpacing": {
+          "default": 48,
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "layerSpacing": {
+          "default": 96,
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "padding": {
+          "default": 32,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "title": "LayoutOptions",
+      "type": "object"
+    },
+    "LineStyle": {
+      "enum": [
+        "solid",
+        "dashed",
+        "dotted"
+      ],
+      "title": "LineStyle",
+      "type": "string"
+    },
+    "Origin": {
+      "description": "Element authorship.",
+      "enum": [
+        "ai",
+        "user"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "Position": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "title": "Position",
+      "type": "object"
+    },
+    "ResourceMount": {
+      "description": "How a resource icon sits in its container.",
+      "enum": [
+        "inside",
+        "border"
+      ],
+      "title": "ResourceMount",
+      "type": "string"
+    },
+    "ResourceNode": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Position"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Size"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "parentId": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "zIndex": {
+          "default": 0,
+          "type": "integer"
+        },
+        "locked": {
+          "default": false,
+          "type": "boolean"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "type": {
+          "const": "resource",
+          "default": "resource",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/ResourceNodeData"
+        }
+      },
+      "required": [
+        "id",
+        "data"
+      ],
+      "title": "ResourceNode",
+      "type": "object"
+    },
+    "ResourceNodeData": {
+      "additionalProperties": false,
+      "description": "An AWS resource icon.",
+      "properties": {
+        "iconKey": {
+          "examples": [
+            "Architecture/Compute/Amazon-EC2"
+          ],
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$",
+          "type": "string"
+        },
+        "resourceRef": {
+          "anyOf": [
+            {
+              "description": "Resource ARN (the key a diagram references)",
+              "pattern": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "labelOverride": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "showFields": {
+          "items": {
+            "enum": [
+              "service",
+              "name",
+              "resourceId",
+              "tags"
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "maxTags": {
+          "default": 3,
+          "maximum": 20,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "mount": {
+          "$ref": "#/$defs/ResourceMount",
+          "default": "inside"
+        },
+        "borderSide": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BorderSide"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin",
+          "default": "user"
+        }
+      },
+      "required": [
+        "iconKey"
+      ],
+      "title": "ResourceNodeData",
+      "type": "object"
+    },
+    "ShapeKind": {
+      "enum": [
+        "rect",
+        "rounded",
+        "ellipse",
+        "diamond"
+      ],
+      "title": "ShapeKind",
+      "type": "string"
+    },
+    "ShapeNode": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Position"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Size"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "parentId": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "zIndex": {
+          "default": 0,
+          "type": "integer"
+        },
+        "locked": {
+          "default": false,
+          "type": "boolean"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "type": {
+          "const": "shape",
+          "default": "shape",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/ShapeNodeData"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "ShapeNode",
+      "type": "object"
+    },
+    "ShapeNodeData": {
+      "additionalProperties": false,
+      "description": "A decorative shape (rectangle, square, ellipse, diamond).",
+      "properties": {
+        "shape": {
+          "$ref": "#/$defs/ShapeKind",
+          "default": "rect"
+        },
+        "fillColor": {
+          "anyOf": [
+            {
+              "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fillOpacity": {
+          "anyOf": [
+            {
+              "maximum": 0.9,
+              "minimum": 0.1,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "stroke": {
+          "anyOf": [
+            {
+              "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin",
+          "default": "user"
+        }
+      },
+      "title": "ShapeNodeData",
+      "type": "object"
+    },
+    "Size": {
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ],
+      "title": "Size",
+      "type": "object"
+    },
+    "TextAlign": {
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ],
+      "title": "TextAlign",
+      "type": "string"
+    },
+    "TextNode": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Position"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Size"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "parentId": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "zIndex": {
+          "default": 0,
+          "type": "integer"
+        },
+        "locked": {
+          "default": false,
+          "type": "boolean"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "type": {
+          "const": "text",
+          "default": "text",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/TextNodeData"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "TextNode",
+      "type": "object"
+    },
+    "TextNodeData": {
+      "additionalProperties": false,
+      "description": "A free-floating text box.",
+      "properties": {
+        "text": {
+          "default": "",
+          "type": "string"
+        },
+        "fontSize": {
+          "default": 14,
+          "maximum": 96,
+          "minimum": 6,
+          "type": "integer"
+        },
+        "bold": {
+          "default": false,
+          "type": "boolean"
+        },
+        "italic": {
+          "default": false,
+          "type": "boolean"
+        },
+        "color": {
+          "anyOf": [
+            {
+              "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "align": {
+          "$ref": "#/$defs/TextAlign",
+          "default": "left"
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin",
+          "default": "user"
+        }
+      },
+      "title": "TextNodeData",
+      "type": "object"
+    },
+    "Viewport": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "default": 0,
+          "type": "number"
+        },
+        "y": {
+          "default": 0,
+          "type": "number"
+        },
+        "zoom": {
+          "default": 1.0,
+          "maximum": 2.0,
+          "minimum": 0.1,
+          "type": "number"
+        }
+      },
+      "title": "Viewport",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Input schema for the AI. Fields with defaults (position / size / locked / hidden / zIndex and so on) may be omitted.",
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0",
+      "default": "1.0",
+      "type": "string"
+    },
+    "meta": {
+      "$ref": "#/$defs/DiagramMeta"
+    },
+    "viewport": {
+      "$ref": "#/$defs/Viewport"
+    },
+    "layout": {
+      "$ref": "#/$defs/LayoutOptions"
+    },
+    "nodes": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "group": "#/$defs/GroupNode",
+            "resource": "#/$defs/ResourceNode",
+            "shape": "#/$defs/ShapeNode",
+            "text": "#/$defs/TextNode"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/ResourceNode"
+          },
+          {
+            "$ref": "#/$defs/GroupNode"
+          },
+          {
+            "$ref": "#/$defs/TextNode"
+          },
+          {
+            "$ref": "#/$defs/ShapeNode"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "edges": {
+      "items": {
+        "$ref": "#/$defs/Edge"
+      },
+      "type": "array"
+    }
+  },
+  "title": "Diagram",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://architecture.local/schema/diagram-ai.schema.json"
+}

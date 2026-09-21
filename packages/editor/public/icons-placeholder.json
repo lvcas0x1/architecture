@@ -1,0 +1,834 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-19T14:42:10.375116Z",
+  "packageRelease": "placeholder",
+  "icons": [
+    {
+      "key": "Architecture/Compute/Amazon-EC2",
+      "group": "Architecture",
+      "category": "Compute",
+      "label": "Amazon EC2",
+      "path": "/icons-placeholder/Architecture/Compute/Amazon-EC2.svg",
+      "aliases": [
+        "amazon ec2",
+        "ec2",
+        "instance",
+        "virtual server"
+      ],
+      "resourceTypes": [
+        "AWS::EC2::Instance"
+      ]
+    },
+    {
+      "key": "Architecture/Compute/AWS-Lambda",
+      "group": "Architecture",
+      "category": "Compute",
+      "label": "AWS Lambda",
+      "path": "/icons-placeholder/Architecture/Compute/AWS-Lambda.svg",
+      "aliases": [
+        "aws lambda",
+        "function",
+        "serverless",
+        "λ"
+      ],
+      "resourceTypes": [
+        "AWS::Lambda::Function"
+      ]
+    },
+    {
+      "key": "Architecture/Compute/Amazon-EC2-Auto-Scaling",
+      "group": "Architecture",
+      "category": "Compute",
+      "label": "AWS Auto Scaling",
+      "path": "/icons-placeholder/Architecture/Compute/Amazon-EC2-Auto-Scaling.svg",
+      "aliases": [
+        "asg",
+        "autoscaling",
+        "aws auto scaling"
+      ],
+      "resourceTypes": [
+        "AWS::AutoScaling::AutoScalingGroup"
+      ]
+    },
+    {
+      "key": "Architecture/Compute/AWS-Batch",
+      "group": "Architecture",
+      "category": "Compute",
+      "label": "AWS Batch",
+      "path": "/icons-placeholder/Architecture/Compute/AWS-Batch.svg",
+      "aliases": [
+        "aws batch",
+        "bat",
+        "batch"
+      ],
+      "resourceTypes": [
+        "AWS::Batch::JobQueue"
+      ]
+    },
+    {
+      "key": "Architecture/Containers/Amazon-Elastic-Container-Service",
+      "group": "Architecture",
+      "category": "Containers",
+      "label": "Amazon ECS",
+      "path": "/icons-placeholder/Architecture/Containers/Amazon-Elastic-Container-Service.svg",
+      "aliases": [
+        "amazon ecs",
+        "container",
+        "ecs"
+      ],
+      "resourceTypes": [
+        "AWS::ECS::Cluster",
+        "AWS::ECS::Service"
+      ]
+    },
+    {
+      "key": "Architecture/Containers/Amazon-Elastic-Kubernetes-Service",
+      "group": "Architecture",
+      "category": "Containers",
+      "label": "Amazon EKS",
+      "path": "/icons-placeholder/Architecture/Containers/Amazon-Elastic-Kubernetes-Service.svg",
+      "aliases": [
+        "amazon eks",
+        "eks",
+        "k8s",
+        "kubernetes"
+      ],
+      "resourceTypes": [
+        "AWS::EKS::Cluster"
+      ]
+    },
+    {
+      "key": "Architecture/Containers/Amazon-Elastic-Container-Registry",
+      "group": "Architecture",
+      "category": "Containers",
+      "label": "Amazon ECR",
+      "path": "/icons-placeholder/Architecture/Containers/Amazon-Elastic-Container-Registry.svg",
+      "aliases": [
+        "amazon ecr",
+        "ecr",
+        "registry"
+      ],
+      "resourceTypes": [
+        "AWS::ECR::Repository"
+      ]
+    },
+    {
+      "key": "Architecture/Containers/AWS-Fargate",
+      "group": "Architecture",
+      "category": "Containers",
+      "label": "AWS Fargate",
+      "path": "/icons-placeholder/Architecture/Containers/AWS-Fargate.svg",
+      "aliases": [
+        "aws fargate",
+        "fargate",
+        "fgt"
+      ],
+      "resourceTypes": []
+    },
+    {
+      "key": "Architecture/Storage/Amazon-Simple-Storage-Service",
+      "group": "Architecture",
+      "category": "Storage",
+      "label": "Amazon S3",
+      "path": "/icons-placeholder/Architecture/Storage/Amazon-Simple-Storage-Service.svg",
+      "aliases": [
+        "amazon s3",
+        "bucket",
+        "object storage",
+        "s3"
+      ],
+      "resourceTypes": [
+        "AWS::S3::Bucket"
+      ]
+    },
+    {
+      "key": "Architecture/Storage/Amazon-Elastic-Block-Store",
+      "group": "Architecture",
+      "category": "Storage",
+      "label": "Amazon EBS",
+      "path": "/icons-placeholder/Architecture/Storage/Amazon-Elastic-Block-Store.svg",
+      "aliases": [
+        "amazon ebs",
+        "disk",
+        "ebs",
+        "volume"
+      ],
+      "resourceTypes": [
+        "AWS::EC2::Volume"
+      ]
+    },
+    {
+      "key": "Architecture/Storage/Amazon-EFS",
+      "group": "Architecture",
+      "category": "Storage",
+      "label": "Amazon EFS",
+      "path": "/icons-placeholder/Architecture/Storage/Amazon-EFS.svg",
+      "aliases": [
+        "amazon efs",
+        "efs",
+        "file system"
+      ],
+      "resourceTypes": [
+        "AWS::EFS::FileSystem"
+      ]
+    },
+    {
+      "key": "Architecture/Storage/AWS-Backup",
+      "group": "Architecture",
+      "category": "Storage",
+      "label": "AWS Backup",
+      "path": "/icons-placeholder/Architecture/Storage/AWS-Backup.svg",
+      "aliases": [
+        "aws backup",
+        "backup",
+        "bkp"
+      ],
+      "resourceTypes": [
+        "AWS::Backup::BackupVault"
+      ]
+    },
+    {
+      "key": "Architecture/Databases/Amazon-RDS",
+      "group": "Architecture",
+      "category": "Databases",
+      "label": "Amazon RDS",
+      "path": "/icons-placeholder/Architecture/Databases/Amazon-RDS.svg",
+      "aliases": [
+        "amazon rds",
+        "database",
+        "db",
+        "rds"
+      ],
+      "resourceTypes": [
+        "AWS::RDS::DBInstance",
+        "AWS::RDS::DBCluster"
+      ]
+    },
+    {
+      "key": "Architecture/Databases/Amazon-Aurora",
+      "group": "Architecture",
+      "category": "Databases",
+      "label": "Amazon Aurora",
+      "path": "/icons-placeholder/Architecture/Databases/Amazon-Aurora.svg",
+      "aliases": [
+        "amazon aurora",
+        "aur",
+        "aurora"
+      ],
+      "resourceTypes": [
+        "AWS::RDS::DBCluster"
+      ]
+    },
+    {
+      "key": "Architecture/Databases/Amazon-DynamoDB",
+      "group": "Architecture",
+      "category": "Databases",
+      "label": "Amazon DynamoDB",
+      "path": "/icons-placeholder/Architecture/Databases/Amazon-DynamoDB.svg",
+      "aliases": [
+        "amazon dynamodb",
+        "ddb",
+        "nosql",
+        "table"
+      ],
+      "resourceTypes": [
+        "AWS::DynamoDB::Table"
+      ]
+    },
+    {
+      "key": "Architecture/Databases/Amazon-ElastiCache",
+      "group": "Architecture",
+      "category": "Databases",
+      "label": "Amazon ElastiCache",
+      "path": "/icons-placeholder/Architecture/Databases/Amazon-ElastiCache.svg",
+      "aliases": [
+        "amazon elasticache",
+        "cache",
+        "ec",
+        "redis"
+      ],
+      "resourceTypes": [
+        "AWS::ElastiCache::CacheCluster"
+      ]
+    },
+    {
+      "key": "Architecture/Networking-Content-Delivery/Amazon-Virtual-Private-Cloud",
+      "group": "Architecture",
+      "category": "Networking Content Delivery",
+      "label": "Amazon VPC",
+      "path": "/icons-placeholder/Architecture/Networking-Content-Delivery/Amazon-Virtual-Private-Cloud.svg",
+      "aliases": [
+        "amazon vpc",
+        "network",
+        "vpc"
+      ],
+      "resourceTypes": [
+        "AWS::EC2::VPC"
+      ]
+    },
+    {
+      "key": "Architecture/Networking-Content-Delivery/Elastic-Load-Balancing",
+      "group": "Architecture",
+      "category": "Networking Content Delivery",
+      "label": "Elastic Load Balancing",
+      "path": "/icons-placeholder/Architecture/Networking-Content-Delivery/Elastic-Load-Balancing.svg",
+      "aliases": [
+        "alb",
+        "elastic load balancing",
+        "elb",
+        "load balancer",
+        "nlb"
+      ],
+      "resourceTypes": [
+        "AWS::ElasticLoadBalancingV2::LoadBalancer"
+      ]
+    },
+    {
+      "key": "Architecture/Networking-Content-Delivery/Amazon-CloudFront",
+      "group": "Architecture",
+      "category": "Networking Content Delivery",
+      "label": "Amazon CloudFront",
+      "path": "/icons-placeholder/Architecture/Networking-Content-Delivery/Amazon-CloudFront.svg",
+      "aliases": [
+        "amazon cloudfront",
+        "cdn",
+        "cf",
+        "delivery"
+      ],
+      "resourceTypes": [
+        "AWS::CloudFront::Distribution"
+      ]
+    },
+    {
+      "key": "Architecture/Networking-Content-Delivery/Amazon-Route-53",
+      "group": "Architecture",
+      "category": "Networking Content Delivery",
+      "label": "Amazon Route 53",
+      "path": "/icons-placeholder/Architecture/Networking-Content-Delivery/Amazon-Route-53.svg",
+      "aliases": [
+        "amazon route 53",
+        "dns",
+        "domain",
+        "r53"
+      ],
+      "resourceTypes": [
+        "AWS::Route53::HostedZone"
+      ]
+    },
+    {
+      "key": "Architecture/Networking-Content-Delivery/Amazon-API-Gateway",
+      "group": "Architecture",
+      "category": "Networking Content Delivery",
+      "label": "Amazon API Gateway",
+      "path": "/icons-placeholder/Architecture/Networking-Content-Delivery/Amazon-API-Gateway.svg",
+      "aliases": [
+        "amazon api gateway",
+        "api",
+        "apig"
+      ],
+      "resourceTypes": [
+        "AWS::ApiGateway::RestApi",
+        "AWS::ApiGatewayV2::Api"
+      ]
+    },
+    {
+      "key": "Architecture/Networking-Content-Delivery/AWS-Transit-Gateway",
+      "group": "Architecture",
+      "category": "Networking Content Delivery",
+      "label": "AWS Transit Gateway",
+      "path": "/icons-placeholder/Architecture/Networking-Content-Delivery/AWS-Transit-Gateway.svg",
+      "aliases": [
+        "aws transit gateway",
+        "tgw",
+        "transit"
+      ],
+      "resourceTypes": [
+        "AWS::EC2::TransitGateway"
+      ]
+    },
+    {
+      "key": "Resource/Networking-Content-Delivery/Amazon-VPC-NAT-Gateway",
+      "group": "Resource",
+      "category": "Networking Content Delivery",
+      "label": "NAT Gateway",
+      "path": "/icons-placeholder/Resource/Networking-Content-Delivery/Amazon-VPC-NAT-Gateway.svg",
+      "aliases": [
+        "nat",
+        "nat gateway"
+      ],
+      "resourceTypes": [
+        "AWS::EC2::NatGateway"
+      ]
+    },
+    {
+      "key": "Resource/Networking-Content-Delivery/Amazon-VPC-Internet-Gateway",
+      "group": "Resource",
+      "category": "Networking Content Delivery",
+      "label": "Internet Gateway",
+      "path": "/icons-placeholder/Resource/Networking-Content-Delivery/Amazon-VPC-Internet-Gateway.svg",
+      "aliases": [
+        "igw",
+        "internet gateway"
+      ],
+      "resourceTypes": [
+        "AWS::EC2::InternetGateway"
+      ]
+    },
+    {
+      "key": "Architecture/Networking-Content-Delivery/AWS-Direct-Connect",
+      "group": "Architecture",
+      "category": "Networking Content Delivery",
+      "label": "AWS Direct Connect",
+      "path": "/icons-placeholder/Architecture/Networking-Content-Delivery/AWS-Direct-Connect.svg",
+      "aliases": [
+        "aws direct connect",
+        "direct connect",
+        "dx"
+      ],
+      "resourceTypes": [
+        "AWS::DirectConnect::Connection"
+      ]
+    },
+    {
+      "key": "Architecture/Security-Identity/AWS-Identity-and-Access-Management",
+      "group": "Architecture",
+      "category": "Security Identity",
+      "label": "AWS IAM",
+      "path": "/icons-placeholder/Architecture/Security-Identity/AWS-Identity-and-Access-Management.svg",
+      "aliases": [
+        "aws iam",
+        "iam",
+        "permission",
+        "role"
+      ],
+      "resourceTypes": [
+        "AWS::IAM::Role",
+        "AWS::IAM::User",
+        "AWS::IAM::Policy"
+      ]
+    },
+    {
+      "key": "Architecture/Security-Identity/AWS-WAF",
+      "group": "Architecture",
+      "category": "Security Identity",
+      "label": "AWS WAF",
+      "path": "/icons-placeholder/Architecture/Security-Identity/AWS-WAF.svg",
+      "aliases": [
+        "aws waf",
+        "firewall",
+        "waf"
+      ],
+      "resourceTypes": [
+        "AWS::WAFv2::WebACL"
+      ]
+    },
+    {
+      "key": "Architecture/Security-Identity/AWS-Secrets-Manager",
+      "group": "Architecture",
+      "category": "Security Identity",
+      "label": "AWS Secrets Manager",
+      "path": "/icons-placeholder/Architecture/Security-Identity/AWS-Secrets-Manager.svg",
+      "aliases": [
+        "aws secrets manager",
+        "sec",
+        "secret",
+        "sensitive"
+      ],
+      "resourceTypes": [
+        "AWS::SecretsManager::Secret"
+      ]
+    },
+    {
+      "key": "Architecture/Security-Identity/AWS-Key-Management-Service",
+      "group": "Architecture",
+      "category": "Security Identity",
+      "label": "AWS KMS",
+      "path": "/icons-placeholder/Architecture/Security-Identity/AWS-Key-Management-Service.svg",
+      "aliases": [
+        "aws kms",
+        "encryption",
+        "key",
+        "kms"
+      ],
+      "resourceTypes": [
+        "AWS::KMS::Key"
+      ]
+    },
+    {
+      "key": "Architecture/Security-Identity/Amazon-Cognito",
+      "group": "Architecture",
+      "category": "Security Identity",
+      "label": "Amazon Cognito",
+      "path": "/icons-placeholder/Architecture/Security-Identity/Amazon-Cognito.svg",
+      "aliases": [
+        "amazon cognito",
+        "authentication",
+        "cog"
+      ],
+      "resourceTypes": [
+        "AWS::Cognito::UserPool"
+      ]
+    },
+    {
+      "key": "Architecture/Security-Identity/AWS-Shield",
+      "group": "Architecture",
+      "category": "Security Identity",
+      "label": "AWS Shield",
+      "path": "/icons-placeholder/Architecture/Security-Identity/AWS-Shield.svg",
+      "aliases": [
+        "aws shield",
+        "ddos",
+        "shl"
+      ],
+      "resourceTypes": []
+    },
+    {
+      "key": "Architecture/Security-Identity/AWS-Network-Firewall",
+      "group": "Architecture",
+      "category": "Security Identity",
+      "label": "Security Group",
+      "path": "/icons-placeholder/Architecture/Security-Identity/AWS-Network-Firewall.svg",
+      "aliases": [
+        "security group",
+        "sg"
+      ],
+      "resourceTypes": [
+        "AWS::EC2::SecurityGroup"
+      ]
+    },
+    {
+      "key": "Architecture/Management-Tools/Amazon-CloudWatch",
+      "group": "Architecture",
+      "category": "Management Tools",
+      "label": "Amazon CloudWatch",
+      "path": "/icons-placeholder/Architecture/Management-Tools/Amazon-CloudWatch.svg",
+      "aliases": [
+        "amazon cloudwatch",
+        "cw",
+        "logs",
+        "monitoring"
+      ],
+      "resourceTypes": [
+        "AWS::CloudWatch::Alarm",
+        "AWS::Logs::LogGroup"
+      ]
+    },
+    {
+      "key": "Architecture/Management-Tools/AWS-CloudTrail",
+      "group": "Architecture",
+      "category": "Management Tools",
+      "label": "AWS CloudTrail",
+      "path": "/icons-placeholder/Architecture/Management-Tools/AWS-CloudTrail.svg",
+      "aliases": [
+        "audit",
+        "aws cloudtrail",
+        "ct"
+      ],
+      "resourceTypes": [
+        "AWS::CloudTrail::Trail"
+      ]
+    },
+    {
+      "key": "Architecture/Management-Tools/AWS-CloudFormation",
+      "group": "Architecture",
+      "category": "Management Tools",
+      "label": "AWS CloudFormation",
+      "path": "/icons-placeholder/Architecture/Management-Tools/AWS-CloudFormation.svg",
+      "aliases": [
+        "aws cloudformation",
+        "cfn",
+        "iac",
+        "stack"
+      ],
+      "resourceTypes": [
+        "AWS::CloudFormation::Stack"
+      ]
+    },
+    {
+      "key": "Architecture/Management-Tools/AWS-Systems-Manager",
+      "group": "Architecture",
+      "category": "Management Tools",
+      "label": "AWS Systems Manager",
+      "path": "/icons-placeholder/Architecture/Management-Tools/AWS-Systems-Manager.svg",
+      "aliases": [
+        "aws systems manager",
+        "parameter",
+        "ssm"
+      ],
+      "resourceTypes": [
+        "AWS::SSM::Parameter"
+      ]
+    },
+    {
+      "key": "Architecture/Management-Tools/AWS-Organizations",
+      "group": "Architecture",
+      "category": "Management Tools",
+      "label": "AWS Organizations",
+      "path": "/icons-placeholder/Architecture/Management-Tools/AWS-Organizations.svg",
+      "aliases": [
+        "aws organizations",
+        "multi-account",
+        "org",
+        "organization"
+      ],
+      "resourceTypes": [
+        "AWS::Organizations::Account"
+      ]
+    },
+    {
+      "key": "Architecture/Application-Integration/Amazon-Simple-Notification-Service",
+      "group": "Architecture",
+      "category": "Application Integration",
+      "label": "Amazon SNS",
+      "path": "/icons-placeholder/Architecture/Application-Integration/Amazon-Simple-Notification-Service.svg",
+      "aliases": [
+        "amazon sns",
+        "notification",
+        "sns",
+        "topic"
+      ],
+      "resourceTypes": [
+        "AWS::SNS::Topic"
+      ]
+    },
+    {
+      "key": "Architecture/Application-Integration/Amazon-Simple-Queue-Service",
+      "group": "Architecture",
+      "category": "Application Integration",
+      "label": "Amazon SQS",
+      "path": "/icons-placeholder/Architecture/Application-Integration/Amazon-Simple-Queue-Service.svg",
+      "aliases": [
+        "amazon sqs",
+        "queue",
+        "sqs"
+      ],
+      "resourceTypes": [
+        "AWS::SQS::Queue"
+      ]
+    },
+    {
+      "key": "Architecture/Application-Integration/Amazon-EventBridge",
+      "group": "Architecture",
+      "category": "Application Integration",
+      "label": "Amazon EventBridge",
+      "path": "/icons-placeholder/Architecture/Application-Integration/Amazon-EventBridge.svg",
+      "aliases": [
+        "amazon eventbridge",
+        "evb",
+        "event"
+      ],
+      "resourceTypes": [
+        "AWS::Events::Rule"
+      ]
+    },
+    {
+      "key": "Architecture/Application-Integration/AWS-Step-Functions",
+      "group": "Architecture",
+      "category": "Application Integration",
+      "label": "AWS Step Functions",
+      "path": "/icons-placeholder/Architecture/Application-Integration/AWS-Step-Functions.svg",
+      "aliases": [
+        "aws step functions",
+        "sfn",
+        "workflow"
+      ],
+      "resourceTypes": [
+        "AWS::StepFunctions::StateMachine"
+      ]
+    },
+    {
+      "key": "Architecture/Analytics/Amazon-Athena",
+      "group": "Architecture",
+      "category": "Analytics",
+      "label": "Amazon Athena",
+      "path": "/icons-placeholder/Architecture/Analytics/Amazon-Athena.svg",
+      "aliases": [
+        "amazon athena",
+        "ath",
+        "query"
+      ],
+      "resourceTypes": [
+        "AWS::Athena::WorkGroup"
+      ]
+    },
+    {
+      "key": "Architecture/Analytics/Amazon-Kinesis",
+      "group": "Architecture",
+      "category": "Analytics",
+      "label": "Amazon Kinesis",
+      "path": "/icons-placeholder/Architecture/Analytics/Amazon-Kinesis.svg",
+      "aliases": [
+        "amazon kinesis",
+        "kin",
+        "stream"
+      ],
+      "resourceTypes": [
+        "AWS::Kinesis::Stream"
+      ]
+    },
+    {
+      "key": "Architecture/Analytics/AWS-Glue",
+      "group": "Architecture",
+      "category": "Analytics",
+      "label": "AWS Glue",
+      "path": "/icons-placeholder/Architecture/Analytics/AWS-Glue.svg",
+      "aliases": [
+        "aws glue",
+        "etl",
+        "glu"
+      ],
+      "resourceTypes": [
+        "AWS::Glue::Job"
+      ]
+    },
+    {
+      "key": "Architecture/Analytics/Amazon-Redshift",
+      "group": "Architecture",
+      "category": "Analytics",
+      "label": "Amazon Redshift",
+      "path": "/icons-placeholder/Architecture/Analytics/Amazon-Redshift.svg",
+      "aliases": [
+        "amazon redshift",
+        "data warehouse",
+        "dwh",
+        "rs"
+      ],
+      "resourceTypes": [
+        "AWS::Redshift::Cluster"
+      ]
+    },
+    {
+      "key": "Architecture/Artificial-Intelligence/Amazon-SageMaker-AI",
+      "group": "Architecture",
+      "category": "Artificial Intelligence",
+      "label": "Amazon SageMaker",
+      "path": "/icons-placeholder/Architecture/Artificial-Intelligence/Amazon-SageMaker-AI.svg",
+      "aliases": [
+        "amazon sagemaker",
+        "machine learning",
+        "ml",
+        "sm"
+      ],
+      "resourceTypes": [
+        "AWS::SageMaker::Endpoint"
+      ]
+    },
+    {
+      "key": "Architecture/Artificial-Intelligence/Amazon-Bedrock",
+      "group": "Architecture",
+      "category": "Artificial Intelligence",
+      "label": "Amazon Bedrock",
+      "path": "/icons-placeholder/Architecture/Artificial-Intelligence/Amazon-Bedrock.svg",
+      "aliases": [
+        "amazon bedrock",
+        "br",
+        "generative ai",
+        "llm"
+      ],
+      "resourceTypes": []
+    },
+    {
+      "key": "Architecture/Developer-Tools/AWS-CodePipeline",
+      "group": "Architecture",
+      "category": "Developer Tools",
+      "label": "AWS CodePipeline",
+      "path": "/icons-placeholder/Architecture/Developer-Tools/AWS-CodePipeline.svg",
+      "aliases": [
+        "aws codepipeline",
+        "cd",
+        "ci",
+        "cp",
+        "pipeline"
+      ],
+      "resourceTypes": [
+        "AWS::CodePipeline::Pipeline"
+      ]
+    },
+    {
+      "key": "Architecture/Developer-Tools/AWS-CodeBuild",
+      "group": "Architecture",
+      "category": "Developer Tools",
+      "label": "AWS CodeBuild",
+      "path": "/icons-placeholder/Architecture/Developer-Tools/AWS-CodeBuild.svg",
+      "aliases": [
+        "aws codebuild",
+        "build",
+        "cb"
+      ],
+      "resourceTypes": [
+        "AWS::CodeBuild::Project"
+      ]
+    },
+    {
+      "key": "Group/Group/AWS-Cloud",
+      "group": "Group",
+      "category": "Group",
+      "label": "AWS Cloud",
+      "path": "/icons-placeholder/Group/Group/AWS-Cloud.svg",
+      "aliases": [
+        "aws",
+        "aws cloud"
+      ],
+      "resourceTypes": []
+    },
+    {
+      "key": "Group/Group/AWS-Account",
+      "group": "Group",
+      "category": "Group",
+      "label": "AWS Account",
+      "path": "/icons-placeholder/Group/Group/AWS-Account.svg",
+      "aliases": [
+        "acc",
+        "aws account"
+      ],
+      "resourceTypes": []
+    },
+    {
+      "key": "Group/Group/Region",
+      "group": "Group",
+      "category": "Group",
+      "label": "Region",
+      "path": "/icons-placeholder/Group/Group/Region.svg",
+      "aliases": [
+        "region",
+        "rgn"
+      ],
+      "resourceTypes": []
+    },
+    {
+      "key": "Group/Group/Virtual-private-cloud-VPC",
+      "group": "Group",
+      "category": "Group",
+      "label": "VPC",
+      "path": "/icons-placeholder/Group/Group/Virtual-private-cloud-VPC.svg",
+      "aliases": [
+        "vpc"
+      ],
+      "resourceTypes": []
+    },
+    {
+      "key": "Group/Group/Public-subnet",
+      "group": "Group",
+      "category": "Group",
+      "label": "Public subnet",
+      "path": "/icons-placeholder/Group/Group/Public-subnet.svg",
+      "aliases": [
+        "pub",
+        "public subnet"
+      ],
+      "resourceTypes": []
+    },
+    {
+      "key": "Group/Group/Private-subnet",
+      "group": "Group",
+      "category": "Group",
+      "label": "Private subnet",
+      "path": "/icons-placeholder/Group/Group/Private-subnet.svg",
+      "aliases": [
+        "pri",
+        "private subnet"
+      ],
+      "resourceTypes": []
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "1.0",
+  "arn": "arn:aws:rds:ap-northeast-1:123456789012:db:rds-prod-ap1",
+  "accountId": "123456789012",
+  "accountAlias": "prod",
+  "region": "ap-northeast-1",
+  "resourceType": "AWS::RDS::DBInstance",
+  "resourceId": "rds-prod-ap1",
+  "service": "RDS",
+  "name": "rds-prod-ap1",
+  "tags": [
+    {
+      "key": "Env",
+      "value": "prod"
+    },
+    {
+      "key": "Owner",
+      "value": "platform"
+    }
+  ],
+  "iconKey": "Architecture/Databases/Amazon-RDS",
+  "lifecycle": "active",
+  "fetchedAt": "2026-09-19T18:52:38.996234Z",
+  "deletedAt": null,
+  "lastError": null,
+  "sections": [
+    {
+      "title": "Overview",
+      "rows": [
+        {
+          "label": "Engine",
+          "value": "mysql 8.0.39",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Instance class",
+          "value": "db.r6g.large",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "State",
+          "value": "available",
+          "kind": "badge",
+          "tone": "ok",
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Multi-AZ",
+          "value": "Yes",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "AZ",
+          "value": "ap-northeast-1a",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        }
+      ],
+      "collapsed": false
+    },
+    {
+      "title": "Connectivity",
+      "rows": [
+        {
+          "label": "Endpoint",
+          "value": "rds-prod-ap1.abcdefg.ap-northeast-1.rds.amazonaws.com",
+          "kind": "code",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Port",
+          "value": "3306",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Public access",
+          "value": "Disabled",
+          "kind": "badge",
+          "tone": "ok",
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Security groups",
+          "value": [
+            "sg-0web0000000000000"
+          ],
+          "kind": "list",
+          "tone": null,
+          "href": null,
+          "ref": null
+        }
+      ],
+      "collapsed": false
+    },
+    {
+      "title": "Storage",
+      "rows": [
+        {
+          "label": "Allocated storage",
+          "value": "200 GiB",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Storage type",
+          "value": "gp3",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Encryption",
+          "value": "Enabled",
+          "kind": "badge",
+          "tone": "ok",
+          "href": null,
+          "ref": null
+        }
+      ],
+      "collapsed": false
+    },
+    {
+      "title": "Backup",
+      "rows": [
+        {
+          "label": "Retention",
+          "value": "14 days",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Backup window",
+          "value": "17:00-17:30",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Deletion protection",
+          "value": "Enabled",
+          "kind": "badge",
+          "tone": "ok",
+          "href": null,
+          "ref": null
+        }
+      ],
+      "collapsed": false
+    },
+    {
+      "title": "Network",
+      "rows": [
+        {
+          "label": "VPC",
+          "value": "vpc-0prod0000000000",
+          "kind": "link",
+          "tone": null,
+          "href": null,
+          "ref": "arn:aws:ec2:ap-northeast-1:123456789012:vpc/vpc-0prod0000000000"
+        },
+        {
+          "label": "Subnet group",
+          "value": "prod-db-subnets",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        }
+      ],
+      "collapsed": false
+    }
+  ],
+  "relations": [
+    {
+      "type": "in-vpc",
+      "targetArn": "arn:aws:ec2:ap-northeast-1:123456789012:vpc/vpc-0prod0000000000",
+      "label": null
+    },
+    {
+      "type": "security-group",
+      "targetArn": "arn:aws:ec2:ap-northeast-1:123456789012:security-group/sg-0web0000000000000",
+      "label": null
+    }
+  ],
+  "raw": null
+}

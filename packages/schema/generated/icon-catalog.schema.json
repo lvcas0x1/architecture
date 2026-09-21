@@ -1,0 +1,103 @@
+{
+  "$defs": {
+    "IconEntry": {
+      "additionalProperties": false,
+      "description": "One icon in the left palette.",
+      "properties": {
+        "key": {
+          "examples": [
+            "Architecture/Compute/Amazon-EC2"
+          ],
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$",
+          "type": "string"
+        },
+        "group": {
+          "$ref": "#/$defs/IconGroup"
+        },
+        "category": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "resourceTypes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "group",
+        "category",
+        "label",
+        "path",
+        "aliases",
+        "resourceTypes"
+      ],
+      "title": "IconEntry",
+      "type": "object"
+    },
+    "IconGroup": {
+      "description": "Official AWS icon families.",
+      "enum": [
+        "Architecture",
+        "Resource",
+        "Category",
+        "Group"
+      ],
+      "title": "IconGroup",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "``packages/editor/public/icons.json``.",
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0",
+      "default": "1.0",
+      "type": "string"
+    },
+    "generatedAt": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "packageRelease": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "icons": {
+      "items": {
+        "$ref": "#/$defs/IconEntry"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "generatedAt",
+    "packageRelease",
+    "icons"
+  ],
+  "title": "IconCatalog",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://architecture.local/schema/icon-catalog.schema.json"
+}

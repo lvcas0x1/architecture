@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0",
+  "arn": "arn:aws:ec2:ap-northeast-1:123456789012:vpc/vpc-0prod0000000000",
+  "accountId": "123456789012",
+  "accountAlias": "prod",
+  "region": "ap-northeast-1",
+  "resourceType": "AWS::EC2::VPC",
+  "resourceId": "vpc-0prod0000000000",
+  "service": "VPC",
+  "name": "vpc-prod",
+  "tags": [
+    {
+      "key": "Name",
+      "value": "vpc-prod"
+    },
+    {
+      "key": "Env",
+      "value": "prod"
+    }
+  ],
+  "iconKey": "Architecture/Networking-Content-Delivery/Amazon-Virtual-Private-Cloud",
+  "lifecycle": "active",
+  "fetchedAt": "2026-09-19T18:52:38.996234Z",
+  "deletedAt": null,
+  "lastError": null,
+  "sections": [
+    {
+      "title": "Overview",
+      "rows": [
+        {
+          "label": "CIDR",
+          "value": "10.0.0.0/16",
+          "kind": "code",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Additional CIDRs",
+          "value": [],
+          "kind": "list",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "State",
+          "value": "available",
+          "kind": "badge",
+          "tone": "ok",
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Default VPC",
+          "value": "No",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Tenancy",
+          "value": "default",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        }
+      ],
+      "collapsed": false
+    }
+  ],
+  "relations": [],
+  "raw": null
+}

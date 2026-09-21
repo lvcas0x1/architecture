@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "title": "Sample: three-tier web",
+    "description": "Reference example of the schema — the AI prompt uses this shape too.",
+    "generator": "user",
+    "accountIds": [
+      "123456789012"
+    ],
+    "regions": [
+      "ap-northeast-1"
+    ]
+  },
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  },
+  "layout": {
+    "mode": "manual",
+    "algorithm": "layered",
+    "direction": "RIGHT"
+  },
+  "nodes": [
+    {
+      "id": "g-global",
+      "type": "group",
+      "data": {
+        "label": "AWS Cloud",
+        "labelColor": null,
+        "fillColor": null,
+        "fillOpacity": null,
+        "style": "global",
+        "resourceRef": null,
+        "iconKey": null,
+        "collapsed": false,
+        "origin": "user"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "width": 1000,
+        "height": 640
+      }
+    },
+    {
+      "id": "g-region",
+      "type": "group",
+      "data": {
+        "label": "ap-northeast-1",
+        "labelColor": null,
+        "fillColor": null,
+        "fillOpacity": null,
+        "style": "region",
+        "resourceRef": null,
+        "iconKey": null,
+        "collapsed": false,
+        "origin": "user"
+      },
+      "parentId": "g-global",
+      "position": {
+        "x": 30,
+        "y": 56
+      },
+      "size": {
+        "width": 940,
+        "height": 560
+      }
+    },
+    {
+      "id": "g-vpc",
+      "type": "group",
+      "position": {
+        "x": 30,
+        "y": 56
+      },
+      "size": {
+        "width": 880,
+        "height": 460
+      },
+      "data": {
+        "label": "vpc-prod (10.0.0.0/16)",
+        "style": "vpc",
+        "origin": "user",
+        "resourceRef": "arn:aws:ec2:ap-northeast-1:123456789012:vpc/vpc-0prod0000000000"
+      },
+      "parentId": "g-region"
+    },
+    {
+      "id": "g-subnet-pub",
+      "type": "group",
+      "parentId": "g-vpc",
+      "position": {
+        "x": 40,
+        "y": 72
+      },
+      "size": {
+        "width": 360,
+        "height": 340
+      },
+      "data": {
+        "label": "subnet-public-1a",
+        "style": "subnet-public",
+        "origin": "user",
+        "resourceRef": "arn:aws:ec2:ap-northeast-1:123456789012:subnet/subnet-0public00000000"
+      }
+    },
+    {
+      "id": "g-subnet-pri",
+      "type": "group",
+      "parentId": "g-vpc",
+      "position": {
+        "x": 460,
+        "y": 72
+      },
+      "size": {
+        "width": 360,
+        "height": 340
+      },
+      "data": {
+        "label": "subnet-private-1a",
+        "style": "subnet-private",
+        "origin": "user",
+        "resourceRef": "arn:aws:ec2:ap-northeast-1:123456789012:subnet/subnet-0private0000000"
+      }
+    },
+    {
+      "id": "n-alb",
+      "type": "resource",
+      "parentId": "g-subnet-pub",
+      "position": {
+        "x": 140,
+        "y": 60
+      },
+      "data": {
+        "iconKey": "Architecture/Networking-Content-Delivery/Elastic-Load-Balancing",
+        "resourceRef": "arn:aws:elasticloadbalancing:ap-northeast-1:123456789012:loadbalancer/app/alb-prod/0a1b2c3d4e5f6789",
+        "origin": "user"
+      }
+    },
+    {
+      "id": "n-ec2",
+      "type": "resource",
+      "parentId": "g-subnet-pri",
+      "position": {
+        "x": 60,
+        "y": 60
+      },
+      "data": {
+        "iconKey": "Architecture/Compute/Amazon-EC2",
+        "resourceRef": "arn:aws:ec2:ap-northeast-1:123456789012:instance/i-0abc123def4567890",
+        "origin": "user"
+      }
+    },
+    {
+      "id": "n-rds",
+      "type": "resource",
+      "parentId": "g-subnet-pri",
+      "position": {
+        "x": 60,
+        "y": 220
+      },
+      "data": {
+        "iconKey": "Architecture/Databases/Amazon-RDS",
+        "resourceRef": "arn:aws:rds:ap-northeast-1:123456789012:db:rds-prod-ap1",
+        "origin": "user"
+      }
+    },
+    {
+      "id": "t-note",
+      "type": "text",
+      "position": {
+        "x": 0,
+        "y": -44
+      },
+      "data": {
+        "text": "Production VPC (Tokyo region)",
+        "fontSize": 18,
+        "bold": true,
+        "origin": "user"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-alb-ec2",
+      "source": "n-alb",
+      "target": "n-ec2",
+      "data": {
+        "line": "solid",
+        "arrow": "end",
+        "router": "smoothstep",
+        "label": "HTTP/80",
+        "relationType": "targets",
+        "origin": "user"
+      }
+    },
+    {
+      "id": "e-ec2-rds",
+      "source": "n-ec2",
+      "target": "n-rds",
+      "data": {
+        "line": "solid",
+        "arrow": "both",
+        "router": "smoothstep",
+        "label": "TCP/3306",
+        "relationType": "connects-to",
+        "origin": "user"
+      }
+    }
+  ]
+}

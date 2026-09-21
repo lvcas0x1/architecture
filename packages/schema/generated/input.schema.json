@@ -1,0 +1,1750 @@
+{
+  "$defs": {
+    "ArrowStyle": {
+      "enum": [
+        "none",
+        "start",
+        "end",
+        "both"
+      ],
+      "title": "ArrowStyle",
+      "type": "string"
+    },
+    "BadgeTone": {
+      "enum": [
+        "ok",
+        "warn",
+        "error",
+        "muted"
+      ],
+      "title": "BadgeTone",
+      "type": "string"
+    },
+    "BorderSide": {
+      "enum": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "title": "BorderSide",
+      "type": "string"
+    },
+    "Diagram": {
+      "additionalProperties": false,
+      "description": "Root of ``workspace/diagrams/*.arch.json``.",
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0",
+          "default": "1.0",
+          "type": "string"
+        },
+        "meta": {
+          "$ref": "#/$defs/DiagramMeta",
+          "default": {
+            "title": "Untitled architecture",
+            "description": null,
+            "generator": "user",
+            "createdAt": null,
+            "updatedAt": null,
+            "accountIds": [],
+            "regions": []
+          }
+        },
+        "viewport": {
+          "$ref": "#/$defs/Viewport",
+          "default": {
+            "x": 0.0,
+            "y": 0.0,
+            "zoom": 1.0
+          }
+        },
+        "layout": {
+          "$ref": "#/$defs/LayoutOptions",
+          "default": {
+            "mode": "manual",
+            "algorithm": "layered",
+            "direction": "RIGHT",
+            "nodeSpacing": 48.0,
+            "layerSpacing": 96.0,
+            "padding": 32.0
+          }
+        },
+        "nodes": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "group": "#/$defs/GroupNode",
+                "resource": "#/$defs/ResourceNode",
+                "shape": "#/$defs/ShapeNode",
+                "text": "#/$defs/TextNode"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ResourceNode"
+              },
+              {
+                "$ref": "#/$defs/GroupNode"
+              },
+              {
+                "$ref": "#/$defs/TextNode"
+              },
+              {
+                "$ref": "#/$defs/ShapeNode"
+              }
+            ]
+          },
+          "type": "array",
+          "default": []
+        },
+        "edges": {
+          "items": {
+            "$ref": "#/$defs/Edge"
+          },
+          "type": "array",
+          "default": []
+        }
+      },
+      "title": "Diagram",
+      "type": "object"
+    },
+    "DiagramMeta": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "default": "Untitled architecture",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "generator": {
+          "default": "user",
+          "enum": [
+            "user",
+            "ai",
+            "mixed"
+          ],
+          "type": "string"
+        },
+        "createdAt": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "updatedAt": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "accountIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "default": []
+        },
+        "regions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "default": []
+        }
+      },
+      "title": "DiagramMeta",
+      "type": "object"
+    },
+    "Edge": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "source": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "target": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "sourceHandle": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "targetHandle": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "data": {
+          "$ref": "#/$defs/EdgeData",
+          "default": {
+            "line": "solid",
+            "arrow": "end",
+            "router": "smoothstep",
+            "label": null,
+            "color": null,
+            "width": 1.5,
+            "relationType": null,
+            "origin": "user"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "source",
+        "target"
+      ],
+      "title": "Edge",
+      "type": "object"
+    },
+    "EdgeData": {
+      "additionalProperties": false,
+      "properties": {
+        "line": {
+          "$ref": "#/$defs/LineStyle",
+          "default": "solid"
+        },
+        "arrow": {
+          "$ref": "#/$defs/ArrowStyle",
+          "default": "end"
+        },
+        "router": {
+          "$ref": "#/$defs/EdgeRouter",
+          "default": "smoothstep"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "color": {
+          "anyOf": [
+            {
+              "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "width": {
+          "default": 1.5,
+          "exclusiveMinimum": 0,
+          "maximum": 12,
+          "type": "number"
+        },
+        "relationType": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin",
+          "default": "user"
+        }
+      },
+      "title": "EdgeData",
+      "type": "object"
+    },
+    "EdgeRouter": {
+      "enum": [
+        "straight",
+        "smoothstep",
+        "step",
+        "bezier"
+      ],
+      "title": "EdgeRouter",
+      "type": "string"
+    },
+    "ExportBundle": {
+      "additionalProperties": false,
+      "description": "What goes into the ``<script type=\"application/json\">`` inside the HTML.",
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0",
+          "default": "1.0",
+          "type": "string"
+        },
+        "exportedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "options": {
+          "$ref": "#/$defs/ExportOptions",
+          "default": {
+            "includeRaw": false,
+            "interactive": true,
+            "includeSearch": true,
+            "maskAccountIds": false
+          }
+        },
+        "diagram": {
+          "$ref": "#/$defs/Diagram"
+        },
+        "resources": {
+          "additionalProperties": {
+            "$ref": "#/$defs/NormalizedResource"
+          },
+          "type": "object",
+          "default": {}
+        },
+        "icons": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object",
+          "default": {}
+        }
+      },
+      "required": [
+        "exportedAt",
+        "diagram"
+      ],
+      "title": "ExportBundle",
+      "type": "object"
+    },
+    "ExportOptions": {
+      "additionalProperties": false,
+      "properties": {
+        "includeRaw": {
+          "default": false,
+          "type": "boolean"
+        },
+        "interactive": {
+          "default": true,
+          "type": "boolean"
+        },
+        "includeSearch": {
+          "default": true,
+          "type": "boolean"
+        },
+        "maskAccountIds": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "title": "ExportOptions",
+      "type": "object"
+    },
+    "GroupNode": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Position"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Size"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "parentId": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "zIndex": {
+          "default": 0,
+          "type": "integer"
+        },
+        "locked": {
+          "default": false,
+          "type": "boolean"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "type": {
+          "const": "group",
+          "default": "group",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/GroupNodeData",
+          "default": {
+            "label": "",
+            "labelColor": null,
+            "fillColor": null,
+            "fillOpacity": null,
+            "style": "generic",
+            "resourceRef": null,
+            "iconKey": null,
+            "collapsed": false,
+            "origin": "user"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "GroupNode",
+      "type": "object"
+    },
+    "GroupNodeData": {
+      "additionalProperties": false,
+      "description": "A box (VPC / AZ / subnet / any frame).",
+      "properties": {
+        "label": {
+          "default": "",
+          "type": "string"
+        },
+        "labelColor": {
+          "anyOf": [
+            {
+              "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fillColor": {
+          "anyOf": [
+            {
+              "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fillOpacity": {
+          "anyOf": [
+            {
+              "maximum": 0.9,
+              "minimum": 0.1,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "style": {
+          "$ref": "#/$defs/GroupStyle",
+          "default": "generic"
+        },
+        "resourceRef": {
+          "anyOf": [
+            {
+              "description": "Resource ARN (the key a diagram references)",
+              "pattern": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "iconKey": {
+          "anyOf": [
+            {
+              "examples": [
+                "Architecture/Compute/Amazon-EC2"
+              ],
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "collapsed": {
+          "default": false,
+          "type": "boolean"
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin",
+          "default": "user"
+        }
+      },
+      "title": "GroupNodeData",
+      "type": "object"
+    },
+    "GroupStyle": {
+      "description": "Box presets. Border colour, corner label and pale fill follow the AWS diagram conventions.",
+      "enum": [
+        "global",
+        "on-premises",
+        "account",
+        "region",
+        "vpc",
+        "az",
+        "subnet-public",
+        "subnet-private",
+        "security-group",
+        "auto-scaling-group",
+        "generic"
+      ],
+      "title": "GroupStyle",
+      "type": "string"
+    },
+    "IconCatalog": {
+      "additionalProperties": false,
+      "description": "``packages/editor/public/icons.json``.",
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0",
+          "default": "1.0",
+          "type": "string"
+        },
+        "generatedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "packageRelease": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "icons": {
+          "items": {
+            "$ref": "#/$defs/IconEntry"
+          },
+          "type": "array",
+          "default": []
+        }
+      },
+      "required": [
+        "generatedAt"
+      ],
+      "title": "IconCatalog",
+      "type": "object"
+    },
+    "IconEntry": {
+      "additionalProperties": false,
+      "description": "One icon in the left palette.",
+      "properties": {
+        "key": {
+          "examples": [
+            "Architecture/Compute/Amazon-EC2"
+          ],
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$",
+          "type": "string"
+        },
+        "group": {
+          "$ref": "#/$defs/IconGroup"
+        },
+        "category": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "default": []
+        },
+        "resourceTypes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "default": []
+        }
+      },
+      "required": [
+        "key",
+        "group",
+        "category",
+        "label",
+        "path"
+      ],
+      "title": "IconEntry",
+      "type": "object"
+    },
+    "IconGroup": {
+      "description": "Official AWS icon families.",
+      "enum": [
+        "Architecture",
+        "Resource",
+        "Category",
+        "Group"
+      ],
+      "title": "IconGroup",
+      "type": "string"
+    },
+    "IconScopes": {
+      "additionalProperties": false,
+      "description": "Attributes (placement layers) for icons, in ``workspace/icon-scopes.json``.",
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0",
+          "default": "1.0",
+          "type": "string"
+        },
+        "updatedAt": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "scopes": {
+          "patternProperties": {
+            "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$": {
+              "$ref": "#/$defs/ResourceScope"
+            }
+          },
+          "propertyNames": {
+            "examples": [
+              "Architecture/Compute/Amazon-EC2"
+            ]
+          },
+          "type": "object",
+          "default": {}
+        }
+      },
+      "title": "IconScopes",
+      "type": "object"
+    },
+    "Inventory": {
+      "additionalProperties": false,
+      "description": "The whole inventory index file.",
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0",
+          "default": "1.0",
+          "type": "string"
+        },
+        "generatedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "resource-explorer",
+            "config-aggregator",
+            "describe",
+            "mixed"
+          ],
+          "type": "string"
+        },
+        "entries": {
+          "items": {
+            "$ref": "#/$defs/InventoryEntry"
+          },
+          "type": "array",
+          "default": []
+        }
+      },
+      "required": [
+        "generatedAt",
+        "source"
+      ],
+      "title": "Inventory",
+      "type": "object"
+    },
+    "InventoryEntry": {
+      "additionalProperties": false,
+      "description": "One entry in ``workspace/inventory/index.json``.",
+      "properties": {
+        "arn": {
+          "description": "Resource ARN (the key a diagram references)",
+          "pattern": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
+          "type": "string"
+        },
+        "accountId": {
+          "type": "string"
+        },
+        "accountAlias": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "region": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tags": {
+          "items": {
+            "$ref": "#/$defs/Tag"
+          },
+          "type": "array",
+          "default": []
+        },
+        "iconKey": {
+          "examples": [
+            "Architecture/Compute/Amazon-EC2"
+          ],
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$",
+          "type": "string"
+        },
+        "lifecycle": {
+          "$ref": "#/$defs/Lifecycle",
+          "default": "unknown"
+        },
+        "fetchedAt": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "hasDetail": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "arn",
+        "accountId",
+        "region",
+        "resourceType",
+        "resourceId",
+        "service",
+        "iconKey"
+      ],
+      "title": "InventoryEntry",
+      "type": "object"
+    },
+    "LayoutMode": {
+      "enum": [
+        "manual",
+        "auto"
+      ],
+      "title": "LayoutMode",
+      "type": "string"
+    },
+    "LayoutOptions": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "$ref": "#/$defs/LayoutMode",
+          "default": "manual"
+        },
+        "algorithm": {
+          "default": "layered",
+          "enum": [
+            "layered",
+            "mrtree",
+            "force",
+            "rectpacking"
+          ],
+          "type": "string"
+        },
+        "direction": {
+          "default": "RIGHT",
+          "enum": [
+            "RIGHT",
+            "DOWN",
+            "LEFT",
+            "UP"
+          ],
+          "type": "string"
+        },
+        "nodeSpacing": {
+          "default": 48.0,
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "layerSpacing": {
+          "default": 96.0,
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "padding": {
+          "default": 32.0,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "title": "LayoutOptions",
+      "type": "object"
+    },
+    "Lifecycle": {
+      "description": "Whether the resource still exists. Updated by ``Refresh``.",
+      "enum": [
+        "active",
+        "deleted",
+        "error",
+        "unknown"
+      ],
+      "title": "Lifecycle",
+      "type": "string"
+    },
+    "LineStyle": {
+      "enum": [
+        "solid",
+        "dashed",
+        "dotted"
+      ],
+      "title": "LineStyle",
+      "type": "string"
+    },
+    "NormalizedResource": {
+      "additionalProperties": false,
+      "description": "One normalized resource (``workspace/inventory/resources/*.json``).",
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0",
+          "default": "1.0",
+          "type": "string"
+        },
+        "arn": {
+          "description": "Resource ARN (the key a diagram references)",
+          "pattern": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
+          "type": "string"
+        },
+        "accountId": {
+          "pattern": "^[0-9]{12}$",
+          "type": "string"
+        },
+        "accountAlias": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "region": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "resourceType": {
+          "pattern": "^AWS::[A-Za-z0-9]+::[A-Za-z0-9]+$",
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tags": {
+          "items": {
+            "$ref": "#/$defs/Tag"
+          },
+          "type": "array",
+          "default": []
+        },
+        "iconKey": {
+          "examples": [
+            "Architecture/Compute/Amazon-EC2"
+          ],
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$",
+          "type": "string"
+        },
+        "lifecycle": {
+          "$ref": "#/$defs/Lifecycle",
+          "default": "unknown"
+        },
+        "fetchedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "deletedAt": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "lastError": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "sections": {
+          "items": {
+            "$ref": "#/$defs/Section"
+          },
+          "type": "array",
+          "default": []
+        },
+        "relations": {
+          "items": {
+            "$ref": "#/$defs/Relation"
+          },
+          "type": "array",
+          "default": []
+        },
+        "raw": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "arn",
+        "accountId",
+        "region",
+        "resourceType",
+        "resourceId",
+        "service",
+        "iconKey",
+        "fetchedAt"
+      ],
+      "title": "NormalizedResource",
+      "type": "object"
+    },
+    "Origin": {
+      "description": "Element authorship.",
+      "enum": [
+        "ai",
+        "user"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "Position": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "title": "Position",
+      "type": "object"
+    },
+    "Relation": {
+      "additionalProperties": false,
+      "description": "A relationship to another resource. The material an AI uses to draw edges.",
+      "properties": {
+        "type": {
+          "pattern": "^[a-z][a-z0-9\\-]*$",
+          "type": "string"
+        },
+        "targetArn": {
+          "description": "Resource ARN (the key a diagram references)",
+          "pattern": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
+          "type": "string"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "type",
+        "targetArn"
+      ],
+      "title": "Relation",
+      "type": "object"
+    },
+    "ResourceMount": {
+      "description": "How a resource icon sits in its container.",
+      "enum": [
+        "inside",
+        "border"
+      ],
+      "title": "ResourceMount",
+      "type": "string"
+    },
+    "ResourceNode": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Position"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Size"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "parentId": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "zIndex": {
+          "default": 0,
+          "type": "integer"
+        },
+        "locked": {
+          "default": false,
+          "type": "boolean"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "type": {
+          "const": "resource",
+          "default": "resource",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/ResourceNodeData"
+        }
+      },
+      "required": [
+        "id",
+        "data"
+      ],
+      "title": "ResourceNode",
+      "type": "object"
+    },
+    "ResourceNodeData": {
+      "additionalProperties": false,
+      "description": "An AWS resource icon.",
+      "properties": {
+        "iconKey": {
+          "examples": [
+            "Architecture/Compute/Amazon-EC2"
+          ],
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$",
+          "type": "string"
+        },
+        "resourceRef": {
+          "anyOf": [
+            {
+              "description": "Resource ARN (the key a diagram references)",
+              "pattern": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "labelOverride": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "showFields": {
+          "items": {
+            "enum": [
+              "service",
+              "name",
+              "resourceId",
+              "tags"
+            ],
+            "type": "string"
+          },
+          "type": "array",
+          "default": [
+            "service",
+            "name",
+            "resourceId",
+            "tags"
+          ]
+        },
+        "maxTags": {
+          "default": 3,
+          "maximum": 20,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "mount": {
+          "$ref": "#/$defs/ResourceMount",
+          "default": "inside"
+        },
+        "borderSide": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BorderSide"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin",
+          "default": "user"
+        }
+      },
+      "required": [
+        "iconKey"
+      ],
+      "title": "ResourceNodeData",
+      "type": "object"
+    },
+    "ResourceScope": {
+      "description": "The layer an AWS resource belongs to.",
+      "enum": [
+        "global",
+        "region",
+        "vpc",
+        "zone",
+        "subnet",
+        "any"
+      ],
+      "title": "ResourceScope",
+      "type": "string"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "description": "One row in the parameter popup's table.",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "kind": {
+          "$ref": "#/$defs/RowKind",
+          "default": "text"
+        },
+        "tone": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BadgeTone"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ref": {
+          "anyOf": [
+            {
+              "description": "Resource ARN (the key a diagram references)",
+              "pattern": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "RowKind": {
+      "enum": [
+        "text",
+        "code",
+        "badge",
+        "link",
+        "list"
+      ],
+      "title": "RowKind",
+      "type": "string"
+    },
+    "Section": {
+      "additionalProperties": false,
+      "description": "A category in the parameter popup. Array order is display order.",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/Row"
+          },
+          "type": "array",
+          "default": []
+        },
+        "collapsed": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "title": "Section",
+      "type": "object"
+    },
+    "ShapeKind": {
+      "enum": [
+        "rect",
+        "rounded",
+        "ellipse",
+        "diamond"
+      ],
+      "title": "ShapeKind",
+      "type": "string"
+    },
+    "ShapeNode": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Position"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Size"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "parentId": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "zIndex": {
+          "default": 0,
+          "type": "integer"
+        },
+        "locked": {
+          "default": false,
+          "type": "boolean"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "type": {
+          "const": "shape",
+          "default": "shape",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/ShapeNodeData",
+          "default": {
+            "shape": "rect",
+            "fillColor": null,
+            "fillOpacity": null,
+            "stroke": null,
+            "origin": "user"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "ShapeNode",
+      "type": "object"
+    },
+    "ShapeNodeData": {
+      "additionalProperties": false,
+      "description": "A decorative shape (rectangle, square, ellipse, diamond).",
+      "properties": {
+        "shape": {
+          "$ref": "#/$defs/ShapeKind",
+          "default": "rect"
+        },
+        "fillColor": {
+          "anyOf": [
+            {
+              "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fillOpacity": {
+          "anyOf": [
+            {
+              "maximum": 0.9,
+              "minimum": 0.1,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "stroke": {
+          "anyOf": [
+            {
+              "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin",
+          "default": "user"
+        }
+      },
+      "title": "ShapeNodeData",
+      "type": "object"
+    },
+    "Size": {
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ],
+      "title": "Size",
+      "type": "object"
+    },
+    "Tag": {
+      "additionalProperties": false,
+      "description": "An AWS resource tag.",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "title": "Tag",
+      "type": "object"
+    },
+    "TextAlign": {
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ],
+      "title": "TextAlign",
+      "type": "string"
+    },
+    "TextNode": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Position"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Size"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "parentId": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-:.]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "zIndex": {
+          "default": 0,
+          "type": "integer"
+        },
+        "locked": {
+          "default": false,
+          "type": "boolean"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "type": {
+          "const": "text",
+          "default": "text",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/TextNodeData",
+          "default": {
+            "text": "",
+            "fontSize": 14,
+            "bold": false,
+            "italic": false,
+            "color": null,
+            "align": "left",
+            "origin": "user"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "TextNode",
+      "type": "object"
+    },
+    "TextNodeData": {
+      "additionalProperties": false,
+      "description": "A free-floating text box.",
+      "properties": {
+        "text": {
+          "default": "",
+          "type": "string"
+        },
+        "fontSize": {
+          "default": 14,
+          "maximum": 96,
+          "minimum": 6,
+          "type": "integer"
+        },
+        "bold": {
+          "default": false,
+          "type": "boolean"
+        },
+        "italic": {
+          "default": false,
+          "type": "boolean"
+        },
+        "color": {
+          "anyOf": [
+            {
+              "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "align": {
+          "$ref": "#/$defs/TextAlign",
+          "default": "left"
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin",
+          "default": "user"
+        }
+      },
+      "title": "TextNodeData",
+      "type": "object"
+    },
+    "Viewport": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "default": 0.0,
+          "type": "number"
+        },
+        "y": {
+          "default": 0.0,
+          "type": "number"
+        },
+        "zoom": {
+          "default": 1.0,
+          "maximum": 2.0,
+          "minimum": 0.1,
+          "type": "number"
+        }
+      },
+      "title": "Viewport",
+      "type": "object"
+    }
+  },
+  "description": "Share model definitions for TypeScript and input-schema generation.",
+  "properties": {
+    "diagram": {
+      "$ref": "#/$defs/Diagram"
+    },
+    "resource": {
+      "$ref": "#/$defs/NormalizedResource"
+    },
+    "inventory": {
+      "$ref": "#/$defs/Inventory"
+    },
+    "icon_catalog": {
+      "$ref": "#/$defs/IconCatalog"
+    },
+    "icon_scopes": {
+      "$ref": "#/$defs/IconScopes"
+    },
+    "export_bundle": {
+      "$ref": "#/$defs/ExportBundle"
+    }
+  },
+  "required": [
+    "diagram",
+    "resource",
+    "inventory",
+    "icon_catalog",
+    "icon_scopes",
+    "export_bundle"
+  ],
+  "title": "_AllModels",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,60 @@
+{
+  "$defs": {
+    "ResourceScope": {
+      "description": "The layer an AWS resource belongs to.",
+      "enum": [
+        "global",
+        "region",
+        "vpc",
+        "zone",
+        "subnet",
+        "any"
+      ],
+      "title": "ResourceScope",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Attributes (placement layers) for icons, in ``workspace/icon-scopes.json``.",
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0",
+      "default": "1.0",
+      "type": "string"
+    },
+    "updatedAt": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "scopes": {
+      "patternProperties": {
+        "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$": {
+          "$ref": "#/$defs/ResourceScope"
+        }
+      },
+      "propertyNames": {
+        "examples": [
+          "Architecture/Compute/Amazon-EC2"
+        ]
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "updatedAt",
+    "scopes"
+  ],
+  "title": "IconScopes",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://architecture.local/schema/icon-scopes.schema.json"
+}

@@ -1,0 +1,34 @@
+# Copy to config/accounts.yaml. Use SSO or AssumeRole with read-only permissions.
+
+defaults:
+  region: ap-northeast-1
+  # resource-explorer | config-aggregator | describe
+  inventory_source: resource-explorer
+  # Include unfiltered AWS responses in stored details.
+  keep_raw_describe: false
+
+# Organization-wide view queried by the delegated administrator.
+resource_explorer:
+  delegated_admin_account: "111111111111"
+  aggregator_region: ap-northeast-1
+  view_arn: "arn:aws:resource-explorer-2:ap-northeast-1:111111111111:view/org-wide/REPLACE_ME"
+
+# AWS Config aggregator.
+config_aggregator:
+  account: "111111111111"
+  region: ap-northeast-1
+  name: org-aggregator
+
+# Omitted or empty regions allow all regions. readonly is informational.
+accounts:
+  - id: "123456789012"
+    alias: prod
+    role_arn: "arn:aws:iam::123456789012:role/ArchDiagramReadOnly"
+    regions: [ap-northeast-1]
+    readonly: true
+
+  - id: "210987654321"
+    alias: stg
+    role_arn: "arn:aws:iam::210987654321:role/ArchDiagramReadOnly"
+    regions: [ap-northeast-1, us-east-1]
+    readonly: true

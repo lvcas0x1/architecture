@@ -1,0 +1,25 @@
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Credentials and account definitions
+config/accounts.yaml
+.env
+.env.*
+!.env.example
+
+# Build output
+workspace/exports/*.html
+workspace/ai-prompt.md
+workspace/inventory/index.lock
+
+# OS
+.DS_Store

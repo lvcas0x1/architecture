@@ -1,0 +1,335 @@
+{
+  "$defs": {
+    "BadgeTone": {
+      "enum": [
+        "ok",
+        "warn",
+        "error",
+        "muted"
+      ],
+      "title": "BadgeTone",
+      "type": "string"
+    },
+    "Lifecycle": {
+      "description": "Whether the resource still exists. Updated by ``Refresh``.",
+      "enum": [
+        "active",
+        "deleted",
+        "error",
+        "unknown"
+      ],
+      "title": "Lifecycle",
+      "type": "string"
+    },
+    "Relation": {
+      "additionalProperties": false,
+      "description": "A relationship to another resource. The material an AI uses to draw edges.",
+      "properties": {
+        "type": {
+          "pattern": "^[a-z][a-z0-9\\-]*$",
+          "type": "string"
+        },
+        "targetArn": {
+          "description": "Resource ARN (the key a diagram references)",
+          "pattern": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
+          "type": "string"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "type",
+        "targetArn",
+        "label"
+      ],
+      "title": "Relation",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "description": "One row in the parameter popup's table.",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "kind": {
+          "$ref": "#/$defs/RowKind",
+          "default": "text"
+        },
+        "tone": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BadgeTone"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ref": {
+          "anyOf": [
+            {
+              "description": "Resource ARN (the key a diagram references)",
+              "pattern": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "label",
+        "value",
+        "kind",
+        "tone",
+        "href",
+        "ref"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "RowKind": {
+      "enum": [
+        "text",
+        "code",
+        "badge",
+        "link",
+        "list"
+      ],
+      "title": "RowKind",
+      "type": "string"
+    },
+    "Section": {
+      "additionalProperties": false,
+      "description": "A category in the parameter popup. Array order is display order.",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/Row"
+          },
+          "type": "array"
+        },
+        "collapsed": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "title",
+        "rows",
+        "collapsed"
+      ],
+      "title": "Section",
+      "type": "object"
+    },
+    "Tag": {
+      "additionalProperties": false,
+      "description": "An AWS resource tag.",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "title": "Tag",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One normalized resource (``workspace/inventory/resources/*.json``).",
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0",
+      "default": "1.0",
+      "type": "string"
+    },
+    "arn": {
+      "description": "Resource ARN (the key a diagram references)",
+      "pattern": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
+      "type": "string"
+    },
+    "accountId": {
+      "pattern": "^[0-9]{12}$",
+      "type": "string"
+    },
+    "accountAlias": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "region": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "resourceType": {
+      "pattern": "^AWS::[A-Za-z0-9]+::[A-Za-z0-9]+$",
+      "type": "string"
+    },
+    "resourceId": {
+      "type": "string"
+    },
+    "service": {
+      "type": "string"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "tags": {
+      "items": {
+        "$ref": "#/$defs/Tag"
+      },
+      "type": "array"
+    },
+    "iconKey": {
+      "examples": [
+        "Architecture/Compute/Amazon-EC2"
+      ],
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$",
+      "type": "string"
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/Lifecycle",
+      "default": "unknown"
+    },
+    "fetchedAt": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "deletedAt": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "lastError": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "sections": {
+      "items": {
+        "$ref": "#/$defs/Section"
+      },
+      "type": "array"
+    },
+    "relations": {
+      "items": {
+        "$ref": "#/$defs/Relation"
+      },
+      "type": "array"
+    },
+    "raw": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "arn",
+    "accountId",
+    "accountAlias",
+    "region",
+    "resourceType",
+    "resourceId",
+    "service",
+    "name",
+    "tags",
+    "iconKey",
+    "lifecycle",
+    "fetchedAt",
+    "deletedAt",
+    "lastError",
+    "sections",
+    "relations",
+    "raw"
+  ],
+  "title": "NormalizedResource",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://architecture.local/schema/resource.schema.json"
+}

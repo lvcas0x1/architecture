@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "1.0",
+  "updatedAt": "2026-09-21T05:47:06.459347Z",
+  "scopes": {
+    "Architecture/Compute/Amazon-EC2": "subnet"
+  }
+}

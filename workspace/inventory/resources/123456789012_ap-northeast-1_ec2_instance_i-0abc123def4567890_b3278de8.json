@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "1.0",
+  "arn": "arn:aws:ec2:ap-northeast-1:123456789012:instance/i-0abc123def4567890",
+  "accountId": "123456789012",
+  "accountAlias": "prod",
+  "region": "ap-northeast-1",
+  "resourceType": "AWS::EC2::Instance",
+  "resourceId": "i-0abc123def4567890",
+  "service": "EC2",
+  "name": "ec2-ap1",
+  "tags": [
+    {
+      "key": "Name",
+      "value": "ec2-ap1"
+    },
+    {
+      "key": "Env",
+      "value": "prod"
+    },
+    {
+      "key": "Owner",
+      "value": "platform"
+    },
+    {
+      "key": "CostCenter",
+      "value": "cc-1001"
+    }
+  ],
+  "iconKey": "Architecture/Compute/Amazon-EC2",
+  "lifecycle": "active",
+  "fetchedAt": "2026-09-19T18:52:38.996234Z",
+  "deletedAt": null,
+  "lastError": null,
+  "sections": [
+    {
+      "title": "Overview",
+      "rows": [
+        {
+          "label": "Instance type",
+          "value": "m5.large",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "State",
+          "value": "running",
+          "kind": "badge",
+          "tone": "ok",
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "AMI",
+          "value": "ami-0123456789abcdef0",
+          "kind": "code",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Platform",
+          "value": "Linux/UNIX",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Launch time",
+          "value": "2026-04-01T09:00:00+00:00",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "AZ",
+          "value": "ap-northeast-1a",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        }
+      ],
+      "collapsed": false
+    },
+    {
+      "title": "Network",
+      "rows": [
+        {
+          "label": "VPC",
+          "value": "vpc-0prod0000000000",
+          "kind": "link",
+          "tone": null,
+          "href": null,
+          "ref": "arn:aws:ec2:ap-northeast-1:123456789012:vpc/vpc-0prod0000000000"
+        },
+        {
+          "label": "Subnet",
+          "value": "subnet-0private0000000",
+          "kind": "link",
+          "tone": null,
+          "href": null,
+          "ref": "arn:aws:ec2:ap-northeast-1:123456789012:subnet/subnet-0private0000000"
+        },
+        {
+          "label": "Private IP",
+          "value": "10.0.2.23",
+          "kind": "code",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Public IP",
+          "value": null,
+          "kind": "code",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Security groups",
+          "value": [
+            "sg-0web0000000000000"
+          ],
+          "kind": "list",
+          "tone": null,
+          "href": null,
+          "ref": null
+        }
+      ],
+      "collapsed": false
+    },
+    {
+      "title": "Storage",
+      "rows": [
+        {
+          "label": "Root device",
+          "value": "/dev/xvda",
+          "kind": "code",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "Root device type",
+          "value": "ebs",
+          "kind": "text",
+          "tone": null,
+          "href": null,
+          "ref": null
+        },
+        {
+          "label": "EBS optimized",
+          "value": "Enabled",
+          "kind": "badge",
+          "tone": "ok",
+          "href": null,
+          "ref": null
+        }
+      ],
+      "collapsed": false
+    },
+    {
+      "title": "Security",
+      "rows": [
+        {
+          "label": "IAM instance profile",
+          "value": "arn:aws:iam::123456789012:instance-profile/ec2-prod-app",
+          "kind": "link",
+          "tone": null,
+          "href": null,
+          "ref": "arn:aws:iam::123456789012:instance-profile/ec2-prod-app"
+        },
+        {
+          "label": "IMDSv2",
+          "value": "required",
+          "kind": "badge",
+          "tone": "ok",
+          "href": null,
+          "ref": null
+        }
+      ],
+      "collapsed": false
+    }
+  ],
+  "relations": [
+    {
+      "type": "in-vpc",
+      "targetArn": "arn:aws:ec2:ap-northeast-1:123456789012:vpc/vpc-0prod0000000000",
+      "label": null
+    },
+    {
+      "type": "in-subnet",
+      "targetArn": "arn:aws:ec2:ap-northeast-1:123456789012:subnet/subnet-0private0000000",
+      "label": null
+    },
+    {
+      "type": "security-group",
+      "targetArn": "arn:aws:ec2:ap-northeast-1:123456789012:security-group/sg-0web0000000000000",
+      "label": null
+    }
+  ],
+  "raw": null
+}

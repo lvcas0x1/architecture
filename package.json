@@ -1,0 +1,30 @@
+{
+  "name": "architecture",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "gen": "npm run gen:schema && npm run gen:types",
+    "gen:schema": "uv run --project backend python backend/scripts/export_schema.py",
+    "gen:types": "npm run gen --workspace @architecture/schema",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test:py": "cd backend && uv run pytest -q",
+    "lint:py": "cd backend && uv run ruff check .",
+    "validate": "uv run --project backend python backend/scripts/validate_diagram.py",
+    "icons": "uv run --project backend python scripts/build_icon_catalog.py",
+    "icons:placeholder": "uv run --project backend python scripts/make_placeholder_icons.py",
+    "dev": "npm run dev --workspace @architecture/editor",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present && npm run test:py",
+    "sample": "uv run --project backend python scripts/make_sample_workspace.py",
+    "api": "uv run --project backend uvicorn app.main:app --reload --port 8000 --app-dir backend",
+    "collect": "uv run --project backend python backend/scripts/collect_inventory.py",
+    "prompt": "uv run --project backend python backend/scripts/make_ai_prompt.py"
+  }
+}

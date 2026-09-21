@@ -1,0 +1,310 @@
+{
+  "_comment": "Extra information added by hand on top of the catalog that build_icon_catalog.py generates: search aliases, and the resourceTypes used to pick an icon from a Profile. Keys are logical icon keys and are applied on every `npm run icons`. Icon attributes (placement layers) are not handled here; the editor writes those to workspace/icon-scopes.json.",
+  "Architecture/Application-Integration/Amazon-Simple-Notification-Service": {
+    "aliases": [
+      "notification",
+      "sns",
+      "topic"
+    ],
+    "resourceTypes": [
+      "AWS::SNS::Topic"
+    ]
+  },
+  "Architecture/Application-Integration/Amazon-Simple-Queue-Service": {
+    "aliases": [
+      "queue",
+      "sqs"
+    ],
+    "resourceTypes": [
+      "AWS::SQS::Queue"
+    ]
+  },
+  "Architecture/Compute/AWS-Lambda": {
+    "aliases": [
+      "function",
+      "serverless"
+    ],
+    "resourceTypes": [
+      "AWS::Lambda::Function"
+    ]
+  },
+  "Architecture/Compute/Amazon-EC2": {
+    "aliases": [
+      "instance",
+      "server",
+      "virtual server"
+    ],
+    "resourceTypes": [
+      "AWS::EC2::Instance"
+    ]
+  },
+  "Architecture/Containers/Amazon-Elastic-Container-Registry": {
+    "aliases": [
+      "ecr",
+      "registry"
+    ],
+    "resourceTypes": [
+      "AWS::ECR::Repository"
+    ]
+  },
+  "Architecture/Containers/Amazon-Elastic-Container-Service": {
+    "aliases": [
+      "container",
+      "ecs"
+    ],
+    "resourceTypes": [
+      "AWS::ECS::Cluster",
+      "AWS::ECS::Service"
+    ]
+  },
+  "Architecture/Containers/Amazon-Elastic-Kubernetes-Service": {
+    "aliases": [
+      "eks",
+      "k8s",
+      "kubernetes"
+    ],
+    "resourceTypes": [
+      "AWS::EKS::Cluster"
+    ]
+  },
+  "Architecture/Databases/Amazon-DynamoDB": {
+    "aliases": [
+      "nosql",
+      "table"
+    ],
+    "resourceTypes": [
+      "AWS::DynamoDB::Table"
+    ]
+  },
+  "Architecture/Databases/Amazon-RDS": {
+    "aliases": [
+      "database",
+      "db",
+      "relational"
+    ],
+    "resourceTypes": [
+      "AWS::RDS::DBInstance",
+      "AWS::RDS::DBCluster"
+    ]
+  },
+  "Architecture/Management-Tools/AWS-CloudFormation": {
+    "aliases": [
+      "iac",
+      "stack"
+    ],
+    "resourceTypes": [
+      "AWS::CloudFormation::Stack"
+    ]
+  },
+  "Architecture/Management-Tools/AWS-Organizations": {
+    "aliases": [
+      "multi-account",
+      "organization"
+    ],
+    "resourceTypes": [
+      "AWS::Organizations::Account"
+    ]
+  },
+  "Architecture/Management-Tools/Amazon-CloudWatch": {
+    "aliases": [
+      "logs",
+      "monitoring"
+    ],
+    "resourceTypes": [
+      "AWS::CloudWatch::Alarm",
+      "AWS::Logs::LogGroup"
+    ]
+  },
+  "Architecture/Networking-Content-Delivery/Amazon-API-Gateway": {
+    "aliases": [
+      "api"
+    ],
+    "resourceTypes": [
+      "AWS::ApiGateway::RestApi",
+      "AWS::ApiGatewayV2::Api"
+    ]
+  },
+  "Architecture/Networking-Content-Delivery/Amazon-CloudFront": {
+    "aliases": [
+      "cdn",
+      "delivery"
+    ],
+    "resourceTypes": [
+      "AWS::CloudFront::Distribution"
+    ]
+  },
+  "Architecture/Networking-Content-Delivery/Amazon-Route-53": {
+    "aliases": [
+      "dns",
+      "domain"
+    ],
+    "resourceTypes": [
+      "AWS::Route53::HostedZone"
+    ]
+  },
+  "Architecture/Networking-Content-Delivery/Amazon-Virtual-Private-Cloud": {
+    "aliases": [
+      "network",
+      "vpc"
+    ],
+    "resourceTypes": [
+      "AWS::EC2::VPC"
+    ]
+  },
+  "Architecture/Networking-Content-Delivery/Elastic-Load-Balancing": {
+    "aliases": [
+      "alb",
+      "elb",
+      "load balancer",
+      "nlb"
+    ],
+    "resourceTypes": [
+      "AWS::ElasticLoadBalancingV2::LoadBalancer"
+    ]
+  },
+  "Architecture/Security-Identity/AWS-Identity-and-Access-Management": {
+    "aliases": [
+      "iam",
+      "permission",
+      "role"
+    ],
+    "resourceTypes": [
+      "AWS::IAM::Role",
+      "AWS::IAM::User",
+      "AWS::IAM::Policy"
+    ]
+  },
+  "Architecture/Security-Identity/AWS-Key-Management-Service": {
+    "aliases": [
+      "encryption",
+      "key",
+      "kms"
+    ],
+    "resourceTypes": [
+      "AWS::KMS::Key"
+    ]
+  },
+  "Architecture/Security-Identity/AWS-Secrets-Manager": {
+    "aliases": [
+      "secret",
+      "sensitive"
+    ],
+    "resourceTypes": [
+      "AWS::SecretsManager::Secret"
+    ]
+  },
+  "Architecture/Storage/Amazon-Elastic-Block-Store": {
+    "aliases": [
+      "disk",
+      "ebs",
+      "volume"
+    ],
+    "resourceTypes": [
+      "AWS::EC2::Volume"
+    ]
+  },
+  "Architecture/Storage/Amazon-Simple-Storage-Service": {
+    "aliases": [
+      "bucket",
+      "object storage",
+      "s3"
+    ],
+    "resourceTypes": [
+      "AWS::S3::Bucket"
+    ]
+  },
+  "Architecture/Artificial-Intelligence/Amazon-Bedrock": {
+    "aliases": [
+      "amazon bedrock",
+      "br",
+      "generative ai",
+      "llm"
+    ]
+  },
+  "Architecture/Compute/AWS-Batch": {
+    "aliases": [
+      "aws batch",
+      "bat",
+      "batch"
+    ],
+    "resourceTypes": [
+      "AWS::Batch::JobQueue"
+    ]
+  },
+  "Architecture/Compute/Amazon-EC2-Auto-Scaling": {
+    "aliases": [
+      "asg",
+      "autoscaling",
+      "aws auto scaling"
+    ],
+    "resourceTypes": [
+      "AWS::AutoScaling::AutoScalingGroup"
+    ]
+  },
+  "Architecture/Developer-Tools/AWS-CodeBuild": {
+    "aliases": [
+      "aws codebuild",
+      "build",
+      "cb"
+    ],
+    "resourceTypes": [
+      "AWS::CodeBuild::Project"
+    ]
+  },
+  "Architecture/Developer-Tools/AWS-CodePipeline": {
+    "aliases": [
+      "aws codepipeline",
+      "cd",
+      "ci",
+      "cp",
+      "pipeline"
+    ],
+    "resourceTypes": [
+      "AWS::CodePipeline::Pipeline"
+    ]
+  },
+  "Architecture/Security-Identity/AWS-Network-Firewall": {
+    "aliases": [
+      "security group",
+      "sg"
+    ],
+    "resourceTypes": [
+      "AWS::EC2::SecurityGroup"
+    ]
+  },
+  "Architecture/Security-Identity/AWS-Shield": {
+    "aliases": [
+      "aws shield",
+      "ddos",
+      "shl"
+    ]
+  },
+  "Architecture/Storage/Amazon-EFS": {
+    "aliases": [
+      "amazon efs",
+      "efs",
+      "file system"
+    ],
+    "resourceTypes": [
+      "AWS::EFS::FileSystem"
+    ]
+  },
+  "Resource/Networking-Content-Delivery/Amazon-VPC-Internet-Gateway": {
+    "aliases": [
+      "igw",
+      "internet gateway"
+    ],
+    "resourceTypes": [
+      "AWS::EC2::InternetGateway"
+    ]
+  },
+  "Resource/Networking-Content-Delivery/Amazon-VPC-NAT-Gateway": {
+    "aliases": [
+      "nat",
+      "nat gateway"
+    ],
+    "resourceTypes": [
+      "AWS::EC2::NatGateway"
+    ]
+  }
+}

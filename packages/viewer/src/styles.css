@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@import "../../editor/src/styles/shared.css";
+@source "../../editor/src";
+
+html,
+body,
+#arch-root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-ui);
+  color: var(--color-ink);
+  background: var(--color-canvas);
+  -webkit-font-smoothing: antialiased;
+}
+
+.react-flow__handle {
+  visibility: hidden;
+}
+
+.react-flow__edge-text {
+  font-size: 11px;
+  fill: #5b6478;
+}
+
+.react-flow__edge-textbg {
+  fill: #f6f7f9;
+}
+
+@media print {
+  .react-flow__minimap,
+  .react-flow__controls,
+  input[type="search"],
+  input[type="range"] {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+}
