@@ -15,6 +15,7 @@ config/accounts.yaml
 .env
 .env.*
 !.env.example
+compose.override.yaml
 
 # Build output
 workspace/exports/*.html

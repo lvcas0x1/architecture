@@ -2,7 +2,17 @@
 
 Create AWS diagrams from AI-generated JSON or edit them manually. Link resource details and export an interactive, self-contained HTML file.
 
-## Setup
+## Containers
+
+```bash
+docker compose up -d --build
+# Or: podman compose up -d --build
+```
+
+Open http://localhost:8000. Icons are included and workspace data persists in a named volume.
+See [container setup](docs/containers.md) for AWS access and server configuration.
+
+## Local development
 
 Requires Node.js 22+, Python 3.12+, and uv.
 
