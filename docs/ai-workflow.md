@@ -1,40 +1,58 @@
 # AI workflow
 
-1. Collect an inventory or run `npm run sample`.
-2. Generate a prompt.
-3. Save the AI response as `*.arch.json`.
-4. Validate it, open it in the editor, and review the results.
-5. Save the diagram or export HTML.
+1. [Collect and import an inventory](collection.md).
+2. Generate a project or select a view in the editor.
+3. Give the AI the project context.
+4. Apply its diagram proposal through regeneration and check the report.
+5. Make human corrections and save the project.
 
 ```bash
-npm run prompt -- --service EC2 --service RDS --region ap-northeast-1 --limit 200 --out workspace/ai-prompt.md
-npm run validate -- workspace/diagrams/draft.arch.json
+npm run architecture -- generate inventory.json --out production.architecture.json
+npm run architecture -- context production.architecture.json --out context.json
+npm run architecture -- regenerate production.architecture.json --proposal draft.arch.json
+npm run architecture -- validate production.architecture.json
 ```
 
-## Input
+The AI returns diagram JSON. `regenerate` merges the proposal, preserves human corrections, and rejects validation errors before replacing the same project file. It returns structured findings and a nonzero exit status on failure. Feed findings back to the AI and repeat until `ok` is true.
+The calling AI drives the loop; the tool requires no model provider or API key.
 
-The prompt includes the diagram input schema, available icon keys, and matching resources.
-Resource relations are included only when detail JSON has been fetched.
+Without `--proposal`, regeneration builds structure from inventory facts:
 
-## Output
+```bash
+npm run architecture -- regenerate production.architecture.json --inventory inventory.json
+```
 
-- Use camelCase fields and listed icon keys.
-- Reference only supplied resource ARNs.
-- Put resources inside groups or shapes.
-- Define hierarchy with `parentId` and connections with `edges`.
-- Set `layout.mode` to `"auto"` and omit node positions.
-- Mark generated nodes and edges with `origin: "ai"`.
-- Give text and shapes explicit positions; auto layout excludes them.
+## Views and detail
 
-Relations describe resource associations, not verified traffic paths. Review inferred connections manually.
-The `origin` field records authorship; selective regeneration and merging are not implemented.
+Use `--view overview|network|application|security`, repeated `--arn`, or repeated `--tag KEY=VALUE` when generating.
+`--chunk-size 100` writes separate files with up to 100 seed resources each. Required ancestors and adjacent dependencies are added, so the total node count can be larger.
+Context includes visible resources and their relationships. Retrieve full parameters separately:
 
-## Validation and layout
+```bash
+npm run architecture -- inspect production.architecture.json --arn 'arn:aws:...'
+```
 
-The CLI checks schema, hierarchy, references, icon keys, and unlinked resources.
-An empty inventory skips ARN existence checks. Use `--strict` to fail on warnings.
+Membership is separate from display nesting. Multi-subnet resources are not placed arbitrarily in one subnet.
+Public/private subnet classification requires route-table evidence; unknown subnets use a generic container.
+Relations distinguish containment, association, permission, traffic, and inference. Config associations do not prove traffic.
 
-Opening an auto-layout diagram runs ELK. **Auto layout** reruns it in the selected direction as one undoable operation.
-Containers with fixed children retain their size and internal positions.
+## Human authority
 
-See [schema reference](schema.md) for placement rules and validation limits.
+Save writes an `architecture-project` file containing the diagram, inventory, evidence, and human overrides.
+Open accepts both project files and legacy `*.arch.json` diagrams.
+Changed fields and added elements are protected. Deleted resources and connections stay deleted across regeneration, including proposals with renamed IDs.
+Human edits can replace earlier human edits or explicitly restore a deleted element. AI proposals cannot reset protection through the merge operation.
+
+Browsers with File System Access support overwrite the opened file after granting write permission. Other browsers download a project file; replace the prior file manually. An externally changed file must be reopened before saving.
+Protection is enforced by the CLI/API merge workflow. An AI with unrestricted filesystem access can bypass it by rewriting files directly; give such agents proposal output access and invoke regeneration separately.
+
+## Validation and API
+
+Checks cover structural validity, actual placement, resource coverage, evidence-backed connections, stale observations, incomplete collection, and overlapping sibling bounds.
+Reports include coverage ratio, unverified edge count, overlap count, and protected-field count. Bounds checks do not measure rendered text or prove network reachability.
+Regression tests exercise generation, source normalization, API failures, deletion preservation, and repeated regeneration.
+
+The same operations are available as `POST /api/projects/import`, `/open`, `/context`, `/validate`, `/human`, and `/regenerate`. See `/docs` for request schemas. These endpoints do not call AWS.
+In the editor, use **Check facts**, **Apply AI proposal**, **Regenerate**, and **Update inventory**.
+
+Legacy `npm run prompt` and `npm run validate` commands remain available for plain diagrams. Use `npm run architecture` for protected projects.

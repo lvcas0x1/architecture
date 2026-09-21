@@ -6,6 +6,8 @@ Pydantic models in `backend/app/models/` define the schema. Run `npm run gen` to
 
 | File | Contents |
 | --- | --- |
+| `*.architecture.json` | Diagram, resource graph, evidence, collection coverage, human overrides |
+| Collected `inventory.json` | Portable resource graph imported independently of the workspace |
 | `workspace/diagrams/*.arch.json` | Layout, topology, resource ARN references |
 | `workspace/inventory/resources/*.json` | Normalized resource details |
 | `workspace/inventory/index.json` | Searchable resource index |
@@ -13,6 +15,11 @@ Pydantic models in `backend/app/models/` define the schema. Run `npm run gen` to
 
 Browser inputs use camelCase. Input schemas allow omitted fields with defaults; serialization schemas describe complete output.
 Pydantic validators and editor checks enforce constraints that JSON Schema alone does not express.
+
+Project files use `format: "architecture-project"`, `version: 1`; collected graphs use `format: "architecture-inventory"`.
+Project `authority` stores protected field paths and deletion records. AI regeneration receives a diagram proposal and merges it against this authority.
+`graph.resources` stores actual membership separately from each node's display `parentId`; `graph.relations` stores categories and evidence.
+See [AI workflow](ai-workflow.md) for merge and validation commands.
 
 ## Nodes
 

@@ -5,6 +5,8 @@ import type {
   Diagram,
   IconCatalog,
   NormalizedResource,
+  Project,
+  ResourceGraph,
 } from "./generated/models.js";
 
 type Schema = {
@@ -86,7 +88,7 @@ const ajv = new Ajv2020({
 });
 addFormats(ajv);
 const validators = Object.fromEntries(
-  ["Diagram", "NormalizedResource", "IconCatalog"].map((name) => [
+  ["Diagram", "NormalizedResource", "IconCatalog", "Project", "ResourceGraph"].map((name) => [
     name,
     ajv.compile({ $defs: ajvSchema.$defs, $ref: `#/$defs/${name}` }),
   ]),
@@ -112,6 +114,8 @@ export const parseDiagramInput = (value: unknown): Diagram =>
   parse(value, "Diagram");
 export const parseIconCatalogInput = (value: unknown): IconCatalog =>
   parse(value, "IconCatalog");
+export const parseProjectInput = (value: unknown): Project => parse(value, "Project");
+export const parseResourceGraphInput = (value: unknown): ResourceGraph => parse(value, "ResourceGraph");
 export function parseResourceInput(value: unknown): NormalizedResource {
   const resource = parse<NormalizedResource>(value, "NormalizedResource");
   const keys = resource.tags.map((tag) => tag.key);

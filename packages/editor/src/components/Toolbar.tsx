@@ -123,12 +123,14 @@ export function Toolbar({
   onNew,
   onExport,
   onAutoLayout,
+  onImport,
 }: {
   onSave: () => void;
   onOpen: () => void;
   onNew: () => void;
   onExport: () => void;
   onAutoLayout: () => void;
+  onImport?: () => void;
 }) {
   const tool = useEditorStore((s) => s.tool);
   const setTool = useEditorStore((s) => s.setTool);
@@ -261,6 +263,8 @@ export function Toolbar({
       </button>
 
       <div className="ml-auto flex items-center gap-1">
+        {onImport && <button type="button" onClick={onImport}
+          className="rounded px-2 py-1 text-xs text-ink-muted hover:bg-accent/10">Import</button>}
         <button
           type="button"
           onClick={onNew}

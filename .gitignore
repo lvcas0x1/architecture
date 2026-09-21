@@ -21,6 +21,7 @@ compose.override.yaml
 workspace/exports/*.html
 workspace/ai-prompt.md
 workspace/inventory/index.lock
+*.architecture.json.lock
 
 # OS
 .DS_Store

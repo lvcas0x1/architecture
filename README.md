@@ -39,7 +39,8 @@ The API runs at http://127.0.0.1:8000.
 - Drag icons into boxes or shapes.
 - Right-click an icon to configure its resource link or refresh its AWS data.
 - Click a linked icon to view parameters.
-- Save diagrams as `*.arch.json` or export a single HTML file.
+- Import collected inventory, apply AI proposals, and check their resource relationships.
+- Save protected projects as `*.architecture.json` or export a single HTML file.
 - Use **Auto layout** to arrange resources and groups. Undo restores the previous layout.
 
 ## AWS configuration
@@ -81,13 +82,15 @@ Follow the AWS icon usage guidelines. Use `npm run icons:placeholder` to regener
 ## AI workflow
 
 ```bash
-npm run prompt -- --out workspace/ai-prompt.md
-npm run validate -- workspace/diagrams/draft.arch.json
+npm run architecture -- collect --out inventory.json
+npm run architecture -- generate inventory.json --out production.architecture.json
+npm run architecture -- context production.architecture.json --out context.json
+npm run architecture -- regenerate production.architecture.json --proposal draft.arch.json
 ```
 
-Ask the AI for hierarchy and connections with `layout.mode: "auto"`, then open the result in the editor.
+Import the inventory or open the project in the editor. Human edits and deletions are preserved during regeneration.
 
-See [AI workflow](docs/ai-workflow.md) and [schema reference](docs/schema.md).
+See [collection](docs/collection.md), [AI workflow](docs/ai-workflow.md), and [schema reference](docs/schema.md).
 
 ## Development
 

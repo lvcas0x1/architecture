@@ -25,6 +25,7 @@
     "sample": "uv run --project backend python scripts/make_sample_workspace.py",
     "api": "uv run --project backend uvicorn app.main:app --reload --port 8000 --app-dir backend",
     "collect": "uv run --project backend python backend/scripts/collect_inventory.py",
-    "prompt": "uv run --project backend python backend/scripts/make_ai_prompt.py"
+    "prompt": "uv run --project backend python backend/scripts/make_ai_prompt.py",
+    "architecture": "uv run --project backend python backend/scripts/architecture.py"
   }
 }

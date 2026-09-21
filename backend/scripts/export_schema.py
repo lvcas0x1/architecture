@@ -21,6 +21,7 @@ from app.models import (  # noqa: E402
     Inventory,
     NormalizedResource,
 )
+from app.models.project import Project, ResourceGraph  # noqa: E402
 
 
 class _AllModels(BaseModel):
@@ -32,6 +33,8 @@ class _AllModels(BaseModel):
     icon_catalog: IconCatalog
     icon_scopes: IconScopes
     export_bundle: ExportBundle
+    project: Project
+    resource_graph: ResourceGraph
 
 
 OUT_DIR = REPO_ROOT / "packages" / "schema" / "generated"
@@ -43,6 +46,8 @@ TARGETS = {
     "icon-catalog.schema.json": IconCatalog,
     "icon-scopes.schema.json": IconScopes,
     "export-bundle.schema.json": ExportBundle,
+    "project.schema.json": Project,
+    "resource-graph.schema.json": ResourceGraph,
 }
 
 BASE_URI = "https://architecture.local/schema"

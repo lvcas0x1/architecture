@@ -1,5 +1,5 @@
 /** Resource cache shared by ARN. */
-import type { InventoryEntry, NormalizedResource } from "@architecture/schema";
+import type { InventoryEntry, NormalizedResource, ResourceGraph } from "@architecture/schema";
 import { create } from "zustand";
 import { ApiUnavailableError, api } from "../lib/api.js";
 
@@ -10,6 +10,8 @@ interface ResourceStoreState {
   inventory: InventoryEntry[];
   inventoryStatus: "idle" | "loading" | "ready" | "unavailable" | "error";
   inventoryError: string | null;
+  localInventory: boolean;
+  importGraph: (graph: ResourceGraph) => void;
   /** Refresh state per ARN. Used to show a spinner on the node. */
   refreshing: Record<string, RefreshState>;
   lastError: string | null;
@@ -39,6 +41,19 @@ export const useResourceStore = create<ResourceStoreState>((set, get) => ({
   inventory: [],
   inventoryStatus: "idle",
   inventoryError: null,
+  localInventory: false,
+  importGraph: (graph) => {
+    get().reset();
+    get().putMany(graph.resources.flatMap((r) => r.detail ? [r.detail] : []));
+    set({ localInventory: true, inventoryStatus: "ready", inventory: graph.resources.map((r) => ({
+      arn: r.arn, accountId: r.accountId, accountAlias: null, region: r.region,
+      resourceType: r.resourceType, resourceId: r.resourceId,
+      service: r.detail?.service ?? r.resourceType.split("::")[1] ?? r.resourceType,
+      name: r.name || null, tags: Object.entries(r.tags).map(([key, value]) => ({ key, value })),
+      iconKey: r.iconKey, lifecycle: r.detail?.lifecycle ?? "unknown",
+      fetchedAt: r.detail?.fetchedAt ?? null, hasDetail: !!r.detail,
+    })) });
+  },
   refreshing: {},
   lastError: null,
 
@@ -60,6 +75,7 @@ export const useResourceStore = create<ResourceStoreState>((set, get) => ({
   },
 
   loadInventory: async () => {
+    if (get().localInventory) return;
     if (get().inventoryStatus === "loading") return;
     const started = generation;
     set({ inventoryStatus: "loading", inventoryError: null });
@@ -143,6 +159,7 @@ export const useResourceStore = create<ResourceStoreState>((set, get) => ({
       inventory: [],
       inventoryStatus: "idle",
       inventoryError: null,
+      localInventory: false,
       refreshing: {},
       lastError: null,
     });

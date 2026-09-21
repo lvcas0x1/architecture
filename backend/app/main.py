@@ -8,7 +8,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from app.api import diagrams, export, icon_scopes, icons, resources
+from app.api import diagrams, export, icon_scopes, icons, projects, resources
 from app.config import REPO_ROOT, get_settings
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
@@ -38,6 +38,7 @@ def create_app() -> FastAPI:
     app.include_router(resources.router, prefix="/api")
     app.include_router(diagrams.router, prefix="/api")
     app.include_router(export.router, prefix="/api")
+    app.include_router(projects.router, prefix="/api")
 
     @app.get("/api/health")
     def health() -> dict[str, object]:

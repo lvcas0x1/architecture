@@ -1,6 +1,7 @@
 /** Saving and loading diagram files (local, in the browser). */
-import type { Diagram } from "@architecture/schema";
-import { parseDiagramInput } from "@architecture/schema";
+import type { Diagram, Project } from "@architecture/schema";
+import { parseDiagramInput, parseProjectInput } from "@architecture/schema";
+import { pickProject, type ProjectFile } from "./project.js";
 
 const EXTENSION = ".arch.json";
 
@@ -37,6 +38,8 @@ export interface LoadedDiagram {
   diagram: Diagram;
   /** What was fixed automatically on load. Told to the user when there is anything. */
   notes: string[];
+  project?: Project;
+  file?: ProjectFile;
 }
 
 /** Remove legacy anchors and their edges. */
@@ -153,21 +156,14 @@ export function parseDiagram(text: string): LoadedDiagram {
 }
 
 /** Open a file dialog and load a diagram. null when cancelled. */
-export function pickDiagramFile(): Promise<LoadedDiagram | null> {
-  return new Promise((resolve, reject) => {
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = ".json,application/json";
-    input.onchange = async () => {
-      const file = input.files?.[0];
-      if (!file) return resolve(null);
-      try {
-        resolve(parseDiagram(await file.text()));
-      } catch (err) {
-        reject(err);
-      }
-    };
-    input.oncancel = () => resolve(null);
-    input.click();
-  });
+export async function pickDiagramFile(): Promise<LoadedDiagram | null> {
+  const loaded = await pickProject();
+  if (!loaded) return null;
+  if ((loaded.value as { format?: string })?.format === "architecture-project") {
+    const project = parseProjectInput(loaded.value);
+    const parsed = parseDiagram(JSON.stringify(project.diagram));
+    project.diagram = parsed.diagram;
+    return { ...parsed, project, file: loaded.file };
+  }
+  return { ...parseDiagram(JSON.stringify(loaded.value)), file: loaded.file };
 }

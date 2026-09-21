@@ -381,78 +381,6 @@
       "title": "Evidence",
       "type": "object"
     },
-    "ExportBundle": {
-      "additionalProperties": false,
-      "description": "What goes into the ``<script type=\"application/json\">`` inside the HTML.",
-      "properties": {
-        "schemaVersion": {
-          "const": "1.0",
-          "default": "1.0",
-          "type": "string"
-        },
-        "exportedAt": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "options": {
-          "$ref": "#/$defs/ExportOptions"
-        },
-        "diagram": {
-          "$ref": "#/$defs/Diagram"
-        },
-        "resources": {
-          "additionalProperties": {
-            "$ref": "#/$defs/NormalizedResource"
-          },
-          "type": "object"
-        },
-        "icons": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "type": "object"
-        }
-      },
-      "required": [
-        "schemaVersion",
-        "exportedAt",
-        "options",
-        "diagram",
-        "resources",
-        "icons"
-      ],
-      "title": "ExportBundle",
-      "type": "object"
-    },
-    "ExportOptions": {
-      "additionalProperties": false,
-      "properties": {
-        "includeRaw": {
-          "default": false,
-          "type": "boolean"
-        },
-        "interactive": {
-          "default": true,
-          "type": "boolean"
-        },
-        "includeSearch": {
-          "default": true,
-          "type": "boolean"
-        },
-        "maskAccountIds": {
-          "default": false,
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "includeRaw",
-        "interactive",
-        "includeSearch",
-        "maskAccountIds"
-      ],
-      "title": "ExportOptions",
-      "type": "object"
-    },
     "GraphRelation": {
       "additionalProperties": false,
       "properties": {
@@ -844,284 +772,6 @@
       "title": "HumanAuthority",
       "type": "object"
     },
-    "IconCatalog": {
-      "additionalProperties": false,
-      "description": "``packages/editor/public/icons.json``.",
-      "properties": {
-        "schemaVersion": {
-          "const": "1.0",
-          "default": "1.0",
-          "type": "string"
-        },
-        "generatedAt": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "packageRelease": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null
-        },
-        "icons": {
-          "items": {
-            "$ref": "#/$defs/IconEntry"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "schemaVersion",
-        "generatedAt",
-        "packageRelease",
-        "icons"
-      ],
-      "title": "IconCatalog",
-      "type": "object"
-    },
-    "IconEntry": {
-      "additionalProperties": false,
-      "description": "One icon in the left palette.",
-      "properties": {
-        "key": {
-          "examples": [
-            "Architecture/Compute/Amazon-EC2"
-          ],
-          "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$",
-          "type": "string"
-        },
-        "group": {
-          "$ref": "#/$defs/IconGroup"
-        },
-        "category": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        },
-        "aliases": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "resourceTypes": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "key",
-        "group",
-        "category",
-        "label",
-        "path",
-        "aliases",
-        "resourceTypes"
-      ],
-      "title": "IconEntry",
-      "type": "object"
-    },
-    "IconGroup": {
-      "description": "Official AWS icon families.",
-      "enum": [
-        "Architecture",
-        "Resource",
-        "Category",
-        "Group"
-      ],
-      "title": "IconGroup",
-      "type": "string"
-    },
-    "IconScopes": {
-      "additionalProperties": false,
-      "description": "Attributes (placement layers) for icons, in ``workspace/icon-scopes.json``.",
-      "properties": {
-        "schemaVersion": {
-          "const": "1.0",
-          "default": "1.0",
-          "type": "string"
-        },
-        "updatedAt": {
-          "anyOf": [
-            {
-              "format": "date-time",
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null
-        },
-        "scopes": {
-          "patternProperties": {
-            "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$": {
-              "$ref": "#/$defs/ResourceScope"
-            }
-          },
-          "propertyNames": {
-            "examples": [
-              "Architecture/Compute/Amazon-EC2"
-            ]
-          },
-          "type": "object"
-        }
-      },
-      "required": [
-        "schemaVersion",
-        "updatedAt",
-        "scopes"
-      ],
-      "title": "IconScopes",
-      "type": "object"
-    },
-    "Inventory": {
-      "additionalProperties": false,
-      "description": "The whole inventory index file.",
-      "properties": {
-        "schemaVersion": {
-          "const": "1.0",
-          "default": "1.0",
-          "type": "string"
-        },
-        "generatedAt": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "source": {
-          "enum": [
-            "resource-explorer",
-            "config-aggregator",
-            "describe",
-            "mixed"
-          ],
-          "type": "string"
-        },
-        "entries": {
-          "items": {
-            "$ref": "#/$defs/InventoryEntry"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "schemaVersion",
-        "generatedAt",
-        "source",
-        "entries"
-      ],
-      "title": "Inventory",
-      "type": "object"
-    },
-    "InventoryEntry": {
-      "additionalProperties": false,
-      "description": "One entry in ``workspace/inventory/index.json``.",
-      "properties": {
-        "arn": {
-          "description": "Resource ARN (the key a diagram references)",
-          "pattern": "^arn:[a-z0-9\\-]*:[a-z0-9\\-]*:[a-z0-9\\-]*:[0-9]{0,12}:.+$",
-          "type": "string"
-        },
-        "accountId": {
-          "type": "string"
-        },
-        "accountAlias": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null
-        },
-        "region": {
-          "type": "string"
-        },
-        "resourceType": {
-          "type": "string"
-        },
-        "resourceId": {
-          "type": "string"
-        },
-        "service": {
-          "type": "string"
-        },
-        "name": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null
-        },
-        "tags": {
-          "items": {
-            "$ref": "#/$defs/Tag"
-          },
-          "type": "array"
-        },
-        "iconKey": {
-          "examples": [
-            "Architecture/Compute/Amazon-EC2"
-          ],
-          "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]*(/[A-Za-z0-9][A-Za-z0-9\\-\\.]*)+$",
-          "type": "string"
-        },
-        "lifecycle": {
-          "$ref": "#/$defs/Lifecycle",
-          "default": "unknown"
-        },
-        "fetchedAt": {
-          "anyOf": [
-            {
-              "format": "date-time",
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null
-        },
-        "hasDetail": {
-          "default": false,
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "arn",
-        "accountId",
-        "accountAlias",
-        "region",
-        "resourceType",
-        "resourceId",
-        "service",
-        "name",
-        "tags",
-        "iconKey",
-        "lifecycle",
-        "fetchedAt",
-        "hasDetail"
-      ],
-      "title": "InventoryEntry",
-      "type": "object"
-    },
     "LayoutMode": {
       "enum": [
         "manual",
@@ -1376,63 +1026,6 @@
       "title": "Position",
       "type": "object"
     },
-    "Project": {
-      "additionalProperties": false,
-      "properties": {
-        "format": {
-          "const": "architecture-project",
-          "default": "architecture-project",
-          "type": "string"
-        },
-        "version": {
-          "const": 1,
-          "default": 1,
-          "type": "integer"
-        },
-        "revision": {
-          "default": 0,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "graph": {
-          "$ref": "#/$defs/ResourceGraph"
-        },
-        "diagram": {
-          "$ref": "#/$defs/Diagram"
-        },
-        "authority": {
-          "$ref": "#/$defs/HumanAuthority"
-        },
-        "view": {
-          "default": "overview",
-          "enum": [
-            "overview",
-            "network",
-            "application",
-            "security"
-          ],
-          "type": "string"
-        },
-        "selectedArns": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "format",
-        "version",
-        "revision",
-        "graph",
-        "diagram",
-        "authority",
-        "view",
-        "selectedArns"
-      ],
-      "title": "Project",
-      "type": "object"
-    },
     "Relation": {
       "additionalProperties": false,
       "description": "A relationship to another resource. The material an AI uses to draw edges.",
@@ -1683,19 +1276,6 @@
       ],
       "title": "ResourceNodeData",
       "type": "object"
-    },
-    "ResourceScope": {
-      "description": "The layer an AWS resource belongs to.",
-      "enum": [
-        "global",
-        "region",
-        "vpc",
-        "zone",
-        "subnet",
-        "any"
-      ],
-      "title": "ResourceScope",
-      "type": "string"
     },
     "Row": {
       "additionalProperties": false,
@@ -2160,45 +1740,61 @@
       "type": "object"
     }
   },
-  "description": "Share model definitions for TypeScript and input-schema generation.",
+  "additionalProperties": false,
   "properties": {
+    "format": {
+      "const": "architecture-project",
+      "default": "architecture-project",
+      "type": "string"
+    },
+    "version": {
+      "const": 1,
+      "default": 1,
+      "type": "integer"
+    },
+    "revision": {
+      "default": 0,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "graph": {
+      "$ref": "#/$defs/ResourceGraph"
+    },
     "diagram": {
       "$ref": "#/$defs/Diagram"
     },
-    "resource": {
-      "$ref": "#/$defs/NormalizedResource"
+    "authority": {
+      "$ref": "#/$defs/HumanAuthority"
     },
-    "inventory": {
-      "$ref": "#/$defs/Inventory"
+    "view": {
+      "default": "overview",
+      "enum": [
+        "overview",
+        "network",
+        "application",
+        "security"
+      ],
+      "type": "string"
     },
-    "icon_catalog": {
-      "$ref": "#/$defs/IconCatalog"
-    },
-    "icon_scopes": {
-      "$ref": "#/$defs/IconScopes"
-    },
-    "export_bundle": {
-      "$ref": "#/$defs/ExportBundle"
-    },
-    "project": {
-      "$ref": "#/$defs/Project"
-    },
-    "resource_graph": {
-      "$ref": "#/$defs/ResourceGraph"
+    "selectedArns": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
     }
   },
   "required": [
+    "format",
+    "version",
+    "revision",
+    "graph",
     "diagram",
-    "resource",
-    "inventory",
-    "icon_catalog",
-    "icon_scopes",
-    "export_bundle",
-    "project",
-    "resource_graph"
+    "authority",
+    "view",
+    "selectedArns"
   ],
-  "title": "_AllModels",
+  "title": "Project",
   "type": "object",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://architecture.local/schema/_all.schema.json"
+  "$id": "https://architecture.local/schema/project.schema.json"
 }

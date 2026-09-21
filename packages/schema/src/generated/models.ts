@@ -83,6 +83,8 @@ export type _AllModels = {
   icon_catalog: IconCatalog;
   icon_scopes: IconScopes;
   export_bundle: ExportBundle;
+  project: Project;
+  resource_graph: ResourceGraph;
 };
 /**
  * Root of ``workspace/diagrams/*.arch.json``.
@@ -382,4 +384,83 @@ export type ExportOptions = {
   interactive: boolean;
   includeSearch: boolean;
   maskAccountIds: boolean;
+};
+export type Project = {
+  format: "architecture-project";
+  version: 1;
+  revision: number;
+  graph: ResourceGraph;
+  diagram: Diagram;
+  authority: HumanAuthority;
+  view: "overview" | "network" | "application" | "security";
+  selectedArns: string[];
+};
+export type ResourceGraph = {
+  format: "architecture-inventory";
+  version: 1;
+  collectedAt: string;
+  resources: GraphResource[];
+  relations: GraphRelation[];
+  coverage: Coverage[];
+};
+export type GraphResource = {
+  /**
+   * Resource ARN (the key a diagram references)
+   */
+  arn: string;
+  accountId: string;
+  region: string;
+  resourceType: string;
+  resourceId: string;
+  name: string;
+  iconKey: string;
+  availabilityZones: string[];
+  vpcIds: string[];
+  subnetIds: string[];
+  tags: {
+    [k: string]: string;
+  };
+  parameters: {
+    [k: string]: unknown;
+  };
+  subnetVisibility: "public" | "private" | "unknown";
+  evidence: Evidence[];
+  detail: NormalizedResource | null;
+};
+export type Evidence = {
+  source: "config" | "resource-explorer" | "describe" | "human" | "inferred";
+  observedAt: string;
+  locator: string;
+};
+export type GraphRelation = {
+  /**
+   * Resource ARN (the key a diagram references)
+   */
+  sourceArn: string;
+  /**
+   * Resource ARN (the key a diagram references)
+   */
+  targetArn: string;
+  type: string;
+  category: "containment" | "association" | "permission" | "traffic" | "inferred";
+  evidence: Evidence[];
+};
+export type Coverage = {
+  source: string;
+  profile: string;
+  accountId: string;
+  region: string;
+  status: "complete" | "partial" | "error" | "unsupported";
+  message: string;
+  count: number;
+};
+export type HumanAuthority = {
+  baseline: Diagram;
+  protected: {
+    [k: string]: string[];
+  };
+  deletedNodes: string[];
+  deletedEdges: string[];
+  deletedRefs: string[];
+  deletedConnections: string[];
 };
